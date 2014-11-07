@@ -1,0 +1,9 @@
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\bin\Debug\Damas.exe.config
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.AboutBox.resources
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.Properties.Resources.resources
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.csproj.GenerateResource.Cache
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\bin\Debug\Damas.exe
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\bin\Debug\Damas.pdb
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.exe
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.pdb
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.Checkers.resources
