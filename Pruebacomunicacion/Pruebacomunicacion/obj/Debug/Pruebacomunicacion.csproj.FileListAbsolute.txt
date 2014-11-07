@@ -1,0 +1,9 @@
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\bin\Debug\Pruebacomunicacion.exe.config
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\bin\Debug\Pruebacomunicacion.exe
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\bin\Debug\Pruebacomunicacion.pdb
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.csprojResolveAssemblyReference.cache
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.Form1.resources
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.Properties.Resources.resources
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.csproj.GenerateResource.Cache
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.exe
+c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.pdb
