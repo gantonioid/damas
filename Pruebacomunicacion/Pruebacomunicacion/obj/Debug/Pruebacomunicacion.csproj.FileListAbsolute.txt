@@ -7,3 +7,12 @@ c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebac
 c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.csproj.GenerateResource.Cache
 c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.exe
 c:\users\kinari\documents\visual studio 2012\Projects\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.pdb
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\bin\Debug\Pruebacomunicacion.exe.config
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.exe
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.pdb
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\bin\Debug\Pruebacomunicacion.exe
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\bin\Debug\Pruebacomunicacion.pdb
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.csprojResolveAssemblyReference.cache
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.Form1.resources
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.Properties.Resources.resources
+C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.csproj.GenerateResource.Cache

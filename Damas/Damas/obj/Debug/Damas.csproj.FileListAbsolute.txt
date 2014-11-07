@@ -7,3 +7,4 @@ C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\bin\Debug\Damas.pdb
 C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.exe
 C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.pdb
 C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.Checkers.resources
+C:\Users\Antonio\Documents\GitHub\damas\Damas\Damas\obj\Debug\Damas.csprojResolveAssemblyReference.cache
