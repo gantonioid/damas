@@ -1,0 +1,9 @@
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\bin\Debug\CommClient.exe.config
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\bin\Debug\CommClient.exe
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\bin\Debug\CommClient.pdb
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.csprojResolveAssemblyReference.cache
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.Form1.resources
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.Properties.Resources.resources
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.csproj.GenerateResource.Cache
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.exe
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.pdb

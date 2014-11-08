@@ -1,0 +1,1 @@
+c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommunicationClient\bin\Debug\CommunicationClient.exe.config

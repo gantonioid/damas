@@ -1,0 +1,6 @@
+c:\users\ecast_000\documents\visual studio 2012\Projects\Communication\Communication\bin\Debug\Communication.exe.config
+C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communication\bin\Debug\Communication.exe
+C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communication\bin\Debug\Communication.pdb
+C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communication\obj\Debug\Communication.csprojResolveAssemblyReference.cache
+C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communication\obj\Debug\Communication.exe
+C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communication\obj\Debug\Communication.pdb

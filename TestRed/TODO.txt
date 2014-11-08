@@ -1,0 +1,19 @@
+Cliente-------
+ - Catchear el abrir la aplicacion y que no encuentre el puerto y server. 
+ - Reconexión
+ - 
+
+
+
+Servidor------
+ - quizas: reconocer el cliente según un id aún si se ha perdido la conexión. 
+ - Temrinar el servidor como tal, hay lineas de codigo que jamás se van a llamar por el while (idea, establercer el while con el booleano de existe algún cliente.)
+
+Docs.
+
+Server
+
+Se crean objetos que son hanbdlers de los clientes
+se modificó la clase para manejar un array de threads
+dentro del array de threads se especifica que el thread es el numero de cliente
+existe un while que es en base a un booleano que termina la comunicación y por lo tanto el thread
