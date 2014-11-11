@@ -9,11 +9,13 @@ using System.Net;
 
 namespace Communication {
     class Program {
+        public static bool Halt = false;
+
         static void Main(string[] args) {
             string OwnIP;
             IPAddress ipaddr;
             TcpListener serverSocket = null;
-            TcpClient clientSocket;
+            TcpClient clientSocket = null;
             int counter = 0;
             bool Init = false;
 
@@ -25,16 +27,21 @@ namespace Communication {
                     serverSocket = new TcpListener(ipaddr, 8888);
                     clientSocket = default(TcpClient);
                     serverSocket.Start();
-                    Console.WriteLine(" >> " + "Server Started");
+                    Console.WriteLine(" >> " + "Server Started -- Presione Q para Terminar");
                     Init = true;
+                    
                 }
                 catch {
                     Console.WriteLine(" >> " + "Error en la IP");
                 }
             }
-          
+
+            //Variable de tecla para terminar el programa 
+            //Thread HaltThread = new Thread(CloseProg);
+            //HaltThread.Start();
+
             if (serverSocket != null) {
-                while (true) {
+                while (!Halt) {
                     counter += 1;
                     clientSocket = serverSocket.AcceptTcpClient();
                     Console.WriteLine(" >> " + "Client No:" + Convert.ToString(counter) + " started!");
@@ -47,6 +54,16 @@ namespace Communication {
                 Console.WriteLine(" >> " + "exit");
                 Console.ReadLine();
             }
+        }
+
+        public static void CloseProg(){
+            ConsoleKeyInfo keyinfo;
+            do {
+                keyinfo = Console.ReadKey();
+                //Console.WriteLine(keyinfo.Key + " was pressed");
+            }
+            while (keyinfo.Key != ConsoleKey.Q);
+            Halt = true;
         }
     }
 
