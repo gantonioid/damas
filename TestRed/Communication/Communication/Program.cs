@@ -10,27 +10,43 @@ using System.Net;
 namespace Communication {
     class Program {
         static void Main(string[] args) {
-            IPAddress ipaddr = IPAddress.Parse("127.0.0.1");
-            TcpListener serverSocket = new TcpListener(ipaddr, 8888);
-            TcpClient clientSocket = default(TcpClient);
+            string OwnIP;
+            IPAddress ipaddr;
+            TcpListener serverSocket = null;
+            TcpClient clientSocket;
             int counter = 0;
+            bool Init = false;
 
-            serverSocket.Start();
-            Console.WriteLine(" >> " + "Server Started");
-
-            counter = 0;
-            while (true) {
-                counter += 1;
-                clientSocket = serverSocket.AcceptTcpClient();
-                Console.WriteLine(" >> " + "Client No:" + Convert.ToString(counter) + " started!");
-                handleClinet client = new handleClinet();
-                client.startClient(clientSocket, Convert.ToString(counter));
+            while (!Init) {
+                Console.WriteLine(" >> " + "Escriba la ip del servidor en la red.");
+                OwnIP = Console.ReadLine();
+                try {
+                    ipaddr = IPAddress.Parse(OwnIP);
+                    serverSocket = new TcpListener(ipaddr, 8888);
+                    clientSocket = default(TcpClient);
+                    serverSocket.Start();
+                    Console.WriteLine(" >> " + "Server Started");
+                    Init = true;
+                }
+                catch {
+                    Console.WriteLine(" >> " + "Error en la IP");
+                }
             }
+          
+            if (serverSocket != null) {
+                while (true) {
+                    counter += 1;
+                    clientSocket = serverSocket.AcceptTcpClient();
+                    Console.WriteLine(" >> " + "Client No:" + Convert.ToString(counter) + " started!");
+                    handleClinet client = new handleClinet();
+                    client.startClient(clientSocket, Convert.ToString(counter));
+                }
 
-            clientSocket.Close();
-            serverSocket.Stop();
-            Console.WriteLine(" >> " + "exit");
-            Console.ReadLine();
+                clientSocket.Close();
+                serverSocket.Stop();
+                Console.WriteLine(" >> " + "exit");
+                Console.ReadLine();
+            }
         }
     }
 
@@ -75,7 +91,7 @@ namespace Communication {
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     if (dataFromClient == "Close") {
                         Console.WriteLine(" << " + "Close Client --- " + clNo);
-                        serverResponse = "Server to clinet(" + clNo + "):  Bye Bye! " + rCount;
+                        serverResponse = "Server to client(" + clNo + "):  Bye Bye! " + clNo;
                         this.Stop();
                     }
                     else {
