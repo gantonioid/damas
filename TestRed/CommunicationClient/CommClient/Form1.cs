@@ -14,6 +14,7 @@ namespace CommClient {
         System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
         NetworkStream serverStream;
         String IPAddress;
+        int ID = 0;
 
         public Form1() {
             InitializeComponent();
@@ -30,8 +31,12 @@ namespace CommClient {
         }
 
         private void button1_Click(object sender, EventArgs e) {
+            string mensaje = "";
+            mensaje = mensajeBox.Text;
+
             serverStream = clientSocket.GetStream();
-            byte[] outStream = System.Text.Encoding.ASCII.GetBytes("Client$");
+            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(mensaje + "$");
+
             serverStream.Write(outStream, 0, outStream.Length);
             serverStream.Flush();
 
@@ -58,8 +63,13 @@ namespace CommClient {
             serverStream.Read(inStream, 0, inStream.Length);
             string returndata = System.Text.Encoding.ASCII.GetString(inStream);
             msg("Data from Server : " + returndata);
+
             button1.Enabled = false;
             button2.Enabled = false;
+
+            serverStream.Close();
+            clientSocket.Close();
+            label1.Text = "Server Desconectado ...";
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -74,6 +84,9 @@ namespace CommClient {
                 label1.Text = "No se pudo conectar";
                 msg("No conexion");
             }
+
+            button1.Enabled = true;
+            button2.Enabled = true;
             
         }
     }

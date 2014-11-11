@@ -72,15 +72,11 @@ namespace Communication {
         TcpClient clientSocket;
         string clNo;
         private volatile bool stop;
-        Thread[] ctThread = new Thread[8];
+        Thread[] ctThread = new Thread[25];
         
 
         public void Stop() {
              stop = true;
-        }
-
-        public void killthis() {
-
         }
 
         public void startClient(TcpClient inClientSocket, string clineNo) {
@@ -108,13 +104,13 @@ namespace Communication {
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     if (dataFromClient == "Close") {
                         Console.WriteLine(" << " + "Close Client --- " + clNo);
-                        serverResponse = "Server to client(" + clNo + "):  Bye Bye! " + clNo;
+                        serverResponse = "Server to client(" + clNo + "):  Bye Bye! " + clNo + "\n";
                         this.Stop();
                     }
                     else {
-                        Console.WriteLine(" >> " + "From client-" + clNo + dataFromClient);
+                        Console.WriteLine(" >> " + "From client:   " + clNo + " >_ " + dataFromClient);
                         rCount = Convert.ToString(requestCount);
-                        serverResponse = "Server to clinet(" + clNo + ") " + rCount;
+                        serverResponse = "Server to clinet(" + clNo + ") " + rCount + "\n";
                     }
                     sendBytes = Encoding.ASCII.GetBytes(serverResponse);
                     networkStream.Write(sendBytes, 0, sendBytes.Length);
@@ -122,7 +118,8 @@ namespace Communication {
                     Console.WriteLine(" >> " + serverResponse);
                 }
                 catch (Exception ex) {
-                    Console.WriteLine(" >> " + ex.ToString());
+                    Console.WriteLine(" >> Error de lectura" );
+                    this.Stop();
                 }
             }
         }

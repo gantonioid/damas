@@ -29,6 +29,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.mensajeBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -42,7 +43,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 38);
+            this.button1.Location = new System.Drawing.Point(16, 109);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 23);
             this.button1.TabIndex = 2;
@@ -62,9 +63,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(16, 67);
+            this.richTextBox1.Location = new System.Drawing.Point(16, 138);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(355, 182);
+            this.richTextBox1.Size = new System.Drawing.Size(355, 258);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 
@@ -85,11 +86,19 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // mensajeBox
+            // 
+            this.mensajeBox.Location = new System.Drawing.Point(16, 83);
+            this.mensajeBox.Name = "mensajeBox";
+            this.mensajeBox.Size = new System.Drawing.Size(349, 20);
+            this.mensajeBox.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 261);
+            this.ClientSize = new System.Drawing.Size(383, 413);
+            this.Controls.Add(this.mensajeBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox1);
@@ -112,6 +121,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox mensajeBox;
     }
 }
 
