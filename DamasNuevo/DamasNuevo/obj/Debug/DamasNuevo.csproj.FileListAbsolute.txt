@@ -1,0 +1,12 @@
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\bin\Debug\DamasNuevo.exe.config
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\bin\Debug\DamasNuevo.exe
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\bin\Debug\DamasNuevo.pdb
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.csprojResolveAssemblyReference.cache
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.Properties.Resources.resources
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.csproj.GenerateResource.Cache
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.exe
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.pdb
+C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.TableroVista.resources
+C:\Users\Antonio\Desktop\DamasNuevo\DamasNuevo\bin\Debug\DamasNuevo.exe.config
+C:\Users\Antonio\Desktop\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.exe
+C:\Users\Antonio\Desktop\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.pdb
