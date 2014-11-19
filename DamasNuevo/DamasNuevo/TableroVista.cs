@@ -11,16 +11,25 @@ using System.Windows.Forms;
 
 namespace DamasNuevo
 {
+    //DIBUJA tablero en pantalla
     public partial class TableroVista : Form
     {
         internal int startX, startY;  //coordenadas de la esquina del tablero
         internal int cellWidth;       //tamaño de celda
         Tablero tablero;
+        Computer jugador;
 
         public TableroVista()
         {
             InitializeComponent();
             tablero = new Tablero();
+            //Establecer Comunicación
+            //
+            //
+            //Asignar turno
+            //
+            //
+            jugar();
         }
 
         //Llamado on WM_PAINT
@@ -62,12 +71,10 @@ namespace DamasNuevo
         {
             int pos;
             Brush cellColor;
+            //Si queremos fondos a partir de imágenes------
             //Image image = new Bitmap("C:\\Users\\Antonio\\Downloads\\cuadro1.jpg");
-            //TextureBrush tBrush = new TextureBrush(image);
-
             //Image image2 = new Bitmap("C:\\Users\\Antonio\\Downloads\\cuadro2.jpg");
-            //TextureBrush tBrush2 = new TextureBrush(image2);
-
+            //---------------------------------------------
             for (int y = 0; y < 8; y++)
                 for (int x = 0; x < 8; x++)
                 {
@@ -81,13 +88,12 @@ namespace DamasNuevo
                         cellColor = new SolidBrush(Color.Black);
                         //cellColor = new TextureBrush(image2);
                     }
-
-
-                    //g.FillRectangle (cellColor, marginX + x * incValue, marginY + y * incValue, incValue - 1, incValue - 1); 
+ 
                     g.FillRectangle(cellColor, marginX + x * incValue, marginY + y * incValue, incValue - 1, incValue - 1);
                 }
         }
 
+        //Dibujar las fichas
         private void drawPieces(Graphics g, int marginX, int marginY, int incValue, PaintEventArgs ev)
         {
             int x, y;
@@ -98,18 +104,21 @@ namespace DamasNuevo
                 {
                     if (tablero.getFicha(i) != null)
                     {
+                        //Color de la ficha
                         if (tablero.getFicha(i).getColor() == 2)
                             pieceColor = new SolidBrush(Color.Red);
                         else
                             pieceColor = new SolidBrush(Color.White);
-
+                        //Dibujar
                         y = i / 4;
                         x = (i % 4) * 2 + (y % 2 == 0 ? 1 : 0);
                         g.FillEllipse(pieceColor, 0 + marginX + x * incValue, 0 + marginY + y * incValue,
                                     incValue - 1 - 2 * 0, incValue - 1 - 2 * 0);
 
+                        //Revisar si está coronada
                         if (tablero.getFicha(i).getCoronada())
                         {
+                            //Dibujarle corona... imagen de corona
                             string path = Path.GetFullPath(@"res");
                             path.Replace("bin\\Debug", "");
                             string file = "\\corona.png";
@@ -127,6 +136,19 @@ namespace DamasNuevo
                     MessageBox.Show("No se pudieron dibujar las piezas\n"+ex.Message,"Error");
                 }
         }
- 
+
+        public void jugar()
+        {//CICLO-------
+            //Esperar turno
+
+            //Generar jugada, tirar y actualizar tablero
+            tablero = jugador.play(this.tablero);
+            //enviar al servidor --- "jugador.listaMovimientos(0)"
+
+            //Volver a pintar
+            Invalidate();
+            //Esperar movimiento del rival
+        //FIN CICLO-----
+        }
     }
 }

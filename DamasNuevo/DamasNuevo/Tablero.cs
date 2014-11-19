@@ -25,6 +25,7 @@ namespace DamasNuevo
             clearBoard();
         }
 
+        //Reset del tablero, nuevas piezas, posiciones por defecto
         public void clearBoard()
         {
             int i;
@@ -51,6 +52,11 @@ namespace DamasNuevo
         public void setTurno(int player)
         {
             turno = player;
+        }
+
+        public int getTurno()
+        {
+            return turno;
         }
 
         //Obtener tablero de juego

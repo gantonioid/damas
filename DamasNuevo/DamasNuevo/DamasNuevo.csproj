@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Computer.cs" />
     <Compile Include="Ficha.cs" />
+    <Compile Include="Movimiento.cs" />
     <Compile Include="Tablero.cs" />
     <Compile Include="TableroVista.cs">
       <SubType>Form</SubType>
