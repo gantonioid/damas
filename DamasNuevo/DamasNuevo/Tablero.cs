@@ -89,37 +89,30 @@ namespace DamasNuevo
             aux = new Ficha(0, 1, false, false);
             vecinos = new int[4] {7,-1,15,-1};
             casillas[11] = new Casilla(aux, vecinos);
+            //vacías--------------------------------------
             //12
-            aux = new Ficha(0, 1, false, false);
+            aux = null;
             vecinos = new int[4] { -1, 8, -1, 16 };
             casillas[12] = new Casilla(aux, vecinos);
-            //vacías--------------------------------------
             //13
-            aux = new Ficha(0, 1, false, false);
             vecinos = new int[4] { 8, 9, 16, 17 };
             casillas[13] = new Casilla(aux, vecinos);
             //14
-            aux = new Ficha(0, 1, false, false);
             vecinos = new int[4] { 9, 10, 17, 18 };
             casillas[14] = new Casilla(aux, vecinos);
             //15
-            aux = new Ficha(0, 1, false, false);
             vecinos = new int[4] { 10, 11, -18, 19 };
             casillas[15] = new Casilla(aux, vecinos);
             //16
-            aux = new Ficha(0, 1, false, false);
             vecinos = new int[4] { 12, 13, 20, 21 };
             casillas[16] = new Casilla(aux, vecinos);
             //17
-            aux = new Ficha(0, 1, false, false);
             vecinos = new int[4] { 13, 14, -21, 22 };
             casillas[17] = new Casilla(aux, vecinos);
             //18
-            aux = null;
             vecinos = new int[4] { 14, 15, 22, 23 };
             casillas[18] = new Casilla(aux, vecinos);
             //19
-            aux = null;
             vecinos = new int[4] { 15, -1, 23, -1 };
             casillas[19] = new Casilla(aux, vecinos);
             //negras--------------------------------------

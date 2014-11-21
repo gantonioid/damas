@@ -17,14 +17,15 @@ namespace DamasNuevo
         internal int startX, startY;  //coordenadas de la esquina del tablero
         internal int cellWidth;       //tamaño de celda
         Tablero tablero;
-        Computer jugador;
+        Computer jugador = new Computer(); 
 
+        //iniciar aplicacion
         public TableroVista()
         {
             InitializeComponent();
             tablero = new Tablero();
             //Establecer Comunicación
-            //
+            openTcpPort();
             //
             //Asignar turno
             //
@@ -142,7 +143,7 @@ namespace DamasNuevo
             //Esperar turno
 
             //Generar jugada, tirar y actualizar tablero
-            tablero = jugador.play(this.tablero);
+            //tablero = jugador.play(this.tablero);
             //enviar al servidor --- "jugador.listaMovimientos(0)"
 
             //Volver a pintar
