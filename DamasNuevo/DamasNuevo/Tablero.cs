@@ -39,9 +39,6 @@ namespace DamasNuevo
         //Reset del tablero, nuevas piezas, posiciones por defecto
         public void clearBoard()
         {
-            int i;
-
-
             whitePieces = 12;
             blackPieces = 12;
 
@@ -188,6 +185,17 @@ namespace DamasNuevo
         {
             return turno;
         }
+
+        //Set y get de casillas
+        //public void setCasillas(Casilla[] casillas)
+        //{
+        //    this.casillas = casillas;
+        //}
+
+        //public Casilla[] getCasillas()
+        //{
+        //    return casillas;
+        //}
 
         //Obtener ficha en posición i del tablero
         public Ficha getFicha( int i )

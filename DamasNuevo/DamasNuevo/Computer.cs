@@ -11,7 +11,6 @@ namespace DamasNuevo
         //Variables globales
         Tablero tablero;
         List<Movimiento> listaMovimientos = new List<Movimiento>();  //este debe ser un arreglo de posicion inicial y final
-        int numChecks = 0; //para no comer mas de una ficha por turno
 
         public Computer()
         {

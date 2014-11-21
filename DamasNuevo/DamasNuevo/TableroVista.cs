@@ -25,7 +25,6 @@ namespace DamasNuevo
             InitializeComponent();
             tablero = new Tablero();
             //Establecer Comunicación
-            openTcpPort();
             //
             //Asignar turno
             //
