@@ -16,5 +16,14 @@ namespace DamasNuevo
             this.posIni = posIni;
             this.posFin = posFin;
         }
+
+        public int getPosIni()
+        {
+            return posIni;
+        }
+        public int getPosFin()
+        {
+            return posFin;
+        }
     }
 }

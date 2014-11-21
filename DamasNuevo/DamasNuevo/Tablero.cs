@@ -12,6 +12,7 @@ namespace DamasNuevo
         //los valores significan el tipo de pieza en la casilla
         private Casilla[] casillas { get; set; }
 
+
         //Número de piezas de cada jugador
         private int whitePieces;
         private int blackPieces;
@@ -23,6 +24,16 @@ namespace DamasNuevo
         {
             casillas = new Casilla[32];
             clearBoard();
+        }
+
+        public Casilla[] getCasillas()
+        {
+            return casillas;
+        }
+
+        public void setCasillas(Casilla[] casillas)
+        {
+            this.casillas = casillas;
         }
 
         //Reset del tablero, nuevas piezas, posiciones por defecto
@@ -190,5 +201,7 @@ namespace DamasNuevo
         {
             return casillas[i].getFicha();
         }
+
+     
     }
 }

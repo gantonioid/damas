@@ -21,51 +21,90 @@ namespace DamasNuevo
         public Tablero play(Tablero tableroActualizado)
         {
             this.tablero = tableroActualizado;
-            ChecarTablero();
+            Casilla[] casillas = tablero.getCasillas();
+            for (int i = 0; i < casillas.Length; i++)
+            {   
+                ChecarCasilla(casillas[i]);
+            }
             move();
 
             //Después de la jugada, devolver el tablero para dibujarlo de nuevo
             return this.tablero;
         }
 
-        public void ChecarTablero()
+        public void ChecarCasilla(Casilla casilla)
         {
-            //Reset de listaMOvimientos
-            listaMovimientos.Clear();
+            int[] vecinos = casilla.getVecinos(); //checo los vecinos de esta casilla 
+            Casilla[] casillas = tablero.getCasillas(); //para revisar todas las casillas del tablero
 
-            for (int i = 0; i < 32; i++)
+            if (casilla.getFicha().getCoronada() == true) //es reina y tengo que revisar todos sus limites 
             {
-                Ficha ficha = tablero.getFicha(i); //La ficha de esa posicion si no hay, regresa null 
-                if (ficha != null) //Hay una ficha en esta posicion
+                for (int i = 0; i < 4; i++) //reviso todos los vecinos
                 {
-                    int color = ficha.getColor();
-                    if (i % 8 == 0 || i % 8 == 7) //si es orilla
+                    Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                    if (fichaVecino != null) //hay ficha en la posicion del vecino i
                     {
-                        if (color == 1) //1: es Blanco
+                        if (fichaVecino.getColor() != casilla.getFicha().getColor()) //es diferente a mi propio color
                         {
-                            check(i, i + 4, color);
-                        }
-                        else //2: es negro
-                        {
-                            check(i, i - 4, color);
+                            checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion()); 
                         }
                     }
-                    else //si no es orilla
+                    else //si no hay ficha en esta posicion
                     {
-                        if (color == 1) //1: es Blanco
-                        {
-                            check(i, i + 4, color);
-                            check(i, i + 3, color);
-                        }
-                        else //2: es negro
-                        {
-                            check(i, i - 4, color);
-                            check(i, i - 3, color);
-                        }
+                        Movimiento movimiento=new Movimiento(casilla.getFicha().getPosicion(), vecinos[i]);
+                        listaMovimientos.Add(movimiento); //no voy a comer, lo agrego al final
                     }
 
-                    //if reina
                 }
+            }
+            else //no es reina
+            {
+                int color=casilla.getFicha().getColor();
+                switch (color)
+                {
+                    case 1: //es blanco
+                        {
+                            for (int i = 2; i < 4; i++) //reviso los inferiores
+                            {
+                                Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                                if (fichaVecino != null) //hay ficha
+                                {
+                                    if (color != fichaVecino.getColor())
+                                    {
+                                        checkVecino(i, casillas[fichaVecino.getPosicion()],casilla.getFicha().getPosicion()); 
+                                    }
+                                }
+                            }
+
+                        } break;
+                    case 2: //es negro
+                        {
+                            for (int i = 0; i < 2; i++) //reviso los superiores
+                            {
+                                Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                                if (fichaVecino != null) //hay ficha
+                                {
+                                    if (color != fichaVecino.getColor())
+                                    {
+                                        checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion());
+                                    }
+                                }
+                            }
+
+                        } break;
+                }
+            }
+        }
+
+        public void checkVecino(int direccion, Casilla casilla, int posini)
+        {
+            int[] vecinos=casilla.getVecinos();
+            Casilla[] casillas = tablero.getCasillas();
+            Ficha fichaVecino = tablero.getFicha(vecinos[direccion]); //agarro la ficha del vecino de la direccion a la que se quiere comer
+            if(fichaVecino!=null) //no hay ficha, entonces es valido y puedo comer
+            {
+                Movimiento movimiento=new Movimiento(posini, vecinos[direccion]);
+                listaMovimientos.Insert(0,movimiento); //tengo posibilidad de comer, lo agrego al principio. 
             }
         }
 
@@ -73,51 +112,22 @@ namespace DamasNuevo
         {
             if (listaMovimientos == null) //no hay movimientos validos 
             {
-                //que hacer?
+                //perder o empate
             }
             else //hay algun movimiento? 
             {
-                //aplicar movimiento en el tablero, no eliminar de la lista
-                //reset atacar = false
+               Movimiento accion=listaMovimientos[0]; //tomo el primer movimiento valido
+               int posIni=accion.getPosIni();
+               int posFin=accion.getPosFin();
+               //tableor destino = tablero origen 
+               Casilla[] casillas = tablero.getCasillas(); //tomo las casillas actuales
+               Ficha ficha = casillas[posIni].getFicha(); //agarro la ficha que quiero tomar 
+               casillas[posIni].setFicha(null); //pongo la casilla en null
+               casillas[posFin].setFicha(ficha); //pongo la ficha en la casilla nueva
+               tablero.setCasillas(casillas);
+
             }
         }
 
-        public void check(int posini, int posfin, int color)
-        {
-            if (numChecks < 2)
-            {
-                numChecks++;
-                Ficha ficha = tablero.getFicha(posfin);
-                int colorFicha = ficha.getColor();
-                if (ficha == null) //no hay una ficha ahi
-                {
-                    Movimiento mov = new Movimiento(posini, posfin);
-                    if (numChecks == 1)
-                    {
-                        ficha.setAtacar(true);
-                        listaMovimientos.Insert(0, mov);
-                    }
-                    else
-                    {
-                        listaMovimientos.Add(mov);
-                    }
-                }
-                else //hay alguna ficha
-                {
-                    if (colorFicha == color) //es un color diferente al mio
-                    {
-                        if (color == 1) //soy ficha blanca
-                            check(posfin, posfin + 4, color);
-                        else //soy ficha negra
-                            check(posfin, posfin - 4, color);
-                    }
-                }
-            }
-            else
-            {
-                numChecks = 0;
-                //no hay movimiento
-            }
-        }
     }
 }
