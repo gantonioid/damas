@@ -10,7 +10,7 @@ namespace DamasNuevo
     {
         //las casillas del tablero
         //los valores significan el tipo de pieza en la casilla
-        private Ficha[] piezas;
+        private Casilla[] casillas { get; set; }
 
         //Número de piezas de cada jugador
         private int whitePieces;
@@ -21,7 +21,7 @@ namespace DamasNuevo
 
         public Tablero()
         {
-            piezas = new Ficha[32];
+            casillas = new Casilla[32];
             clearBoard();
         }
 
@@ -36,15 +36,141 @@ namespace DamasNuevo
 
             turno = 1;
 
-            //blancas
-            for (i = 0; i < 12; i++)
-                piezas[i] = new Ficha(i, 1, false, false);
-            //vacías
-            for (i = 12; i < 20; i++)
-                piezas[i] = null;
-            //negras
-            for (i = 20; i < 32; i++)
-                piezas[i] = new Ficha(i, 2, false, true);
+            //variables auxiliares para llenar el tablero
+            Ficha aux;
+            int[] vecinos;
+
+            //blancas-------------------------------------
+            //0
+            aux = new Ficha(0, 1, false, false);
+            vecinos =  new int[4] {-1,-1,4,5};
+            casillas[0] = new Casilla(aux, vecinos);
+            //1
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {-1,-1,5,6};
+            casillas[1] = new Casilla(aux, vecinos);
+            //2
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {-1,-1,6,7};
+            casillas[2] = new Casilla(aux, vecinos);
+            //3
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {-1,-1,7,-1};
+            casillas[3] = new Casilla(aux, vecinos);
+            //4
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {-1,0,-1,8};
+            casillas[4] = new Casilla(aux, vecinos);
+            //5
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {0,1,8,9};
+            casillas[5] = new Casilla(aux, vecinos);
+            //6
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {1,2,9,10};
+            casillas[6] = new Casilla(aux, vecinos);
+            //7
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {2,3,10,11};
+            casillas[7] = new Casilla(aux, vecinos);
+            //8
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {4,5,12,13};
+            casillas[8] = new Casilla(aux, vecinos);
+            //9
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {5,6,13,14};
+            casillas[9] = new Casilla(aux, vecinos);
+            //10
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {6,7,14,15};
+            casillas[10] = new Casilla(aux, vecinos);
+            //11
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] {7,-1,15,-1};
+            casillas[11] = new Casilla(aux, vecinos);
+            //12
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] { -1, 8, -1, 16 };
+            casillas[12] = new Casilla(aux, vecinos);
+            //vacías--------------------------------------
+            //13
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] { 8, 9, 16, 17 };
+            casillas[13] = new Casilla(aux, vecinos);
+            //14
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] { 9, 10, 17, 18 };
+            casillas[14] = new Casilla(aux, vecinos);
+            //15
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] { 10, 11, -18, 19 };
+            casillas[15] = new Casilla(aux, vecinos);
+            //16
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] { 12, 13, 20, 21 };
+            casillas[16] = new Casilla(aux, vecinos);
+            //17
+            aux = new Ficha(0, 1, false, false);
+            vecinos = new int[4] { 13, 14, -21, 22 };
+            casillas[17] = new Casilla(aux, vecinos);
+            //18
+            aux = null;
+            vecinos = new int[4] { 14, 15, 22, 23 };
+            casillas[18] = new Casilla(aux, vecinos);
+            //19
+            aux = null;
+            vecinos = new int[4] { 15, -1, 23, -1 };
+            casillas[19] = new Casilla(aux, vecinos);
+            //negras--------------------------------------
+            //20
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { -1, 16, -1, 24 };
+            casillas[20] = new Casilla(aux, vecinos);
+            //21
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 16, 17, 24, 25 };
+            casillas[21] = new Casilla(aux, vecinos);
+            //22
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 17, 18, 25, 26 };
+            casillas[22] = new Casilla(aux, vecinos);
+            //23
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 18, 19, 26, 27 };
+            casillas[23] = new Casilla(aux, vecinos);
+            //24
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 20, 21, 28, 29 };
+            casillas[24] = new Casilla(aux, vecinos);
+            //25
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 21, 22, 29, 30 };
+            casillas[25] = new Casilla(aux, vecinos);
+            //26
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 22, 23, 30, 31 };
+            casillas[26] = new Casilla(aux, vecinos);
+            //27
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 23, -1, 31, -1 };
+            casillas[27] = new Casilla(aux, vecinos);
+            //28
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { -1, 24, -1, -1 };
+            casillas[28] = new Casilla(aux, vecinos);
+            //29
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 24, 25, -1, -1 };
+            casillas[29] = new Casilla(aux, vecinos);
+            //30
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 25, 26, -1, -1 };
+            casillas[30] = new Casilla(aux, vecinos);
+            //31
+            aux = new Ficha(0, 2, false, false);
+            vecinos = new int[4] { 26, 27, -1, -1 };
+            casillas[31] = new Casilla(aux, vecinos);
         }
 
         //Cambiar turno
@@ -59,16 +185,10 @@ namespace DamasNuevo
             return turno;
         }
 
-        //Obtener tablero de juego
-        public Ficha[] getPiezas()
-        {
-            return piezas;
-        }
-
         //Obtener ficha en posición i del tablero
-        public Ficha getFicha( int i)
+        public Ficha getFicha( int i )
         {
-            return piezas[i];
+            return casillas[i].getFicha();
         }
     }
 }

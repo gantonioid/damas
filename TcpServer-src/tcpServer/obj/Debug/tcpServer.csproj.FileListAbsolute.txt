@@ -5,3 +5,10 @@ C:\Users\ecast_000\Documents\UDEM\TcpServer-src\tcpServer\obj\Debug\tcpServer.Tc
 C:\Users\ecast_000\Documents\UDEM\TcpServer-src\tcpServer\obj\Debug\tcpServer.csproj.GenerateResource.Cache
 C:\Users\ecast_000\Documents\UDEM\TcpServer-src\tcpServer\obj\Debug\tcpServer.dll
 C:\Users\ecast_000\Documents\UDEM\TcpServer-src\tcpServer\obj\Debug\tcpServer.pdb
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\tcpServer\bin\Debug\tcpServer.dll
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\tcpServer\bin\Debug\tcpServer.pdb
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\tcpServer\obj\Debug\tcpServer.csprojResolveAssemblyReference.cache
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\tcpServer\obj\Debug\tcpServer.TcpServer.resources
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\tcpServer\obj\Debug\tcpServer.csproj.GenerateResource.Cache
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\tcpServer\obj\Debug\tcpServer.dll
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\tcpServer\obj\Debug\tcpServer.pdb

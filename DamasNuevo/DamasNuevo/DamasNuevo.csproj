@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Casilla.cs" />
     <Compile Include="Computer.cs" />
     <Compile Include="Ficha.cs" />
     <Compile Include="Movimiento.cs" />

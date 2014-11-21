@@ -8,3 +8,13 @@ C:\Users\ecast_000\Documents\UDEM\TcpServer-src\Test App\obj\x86\Debug\testApp.P
 C:\Users\ecast_000\Documents\UDEM\TcpServer-src\Test App\obj\x86\Debug\TestApp.csproj.GenerateResource.Cache
 C:\Users\ecast_000\Documents\UDEM\TcpServer-src\Test App\obj\x86\Debug\tcpServerTester.exe
 C:\Users\ecast_000\Documents\UDEM\TcpServer-src\Test App\obj\x86\Debug\tcpServerTester.pdb
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\tcpServerTester.exe
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\tcpServerTester.pdb
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\bin\Debug\tcpServerTester.exe
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\bin\Debug\tcpServerTester.pdb
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\bin\Debug\tcpServer.dll
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\bin\Debug\tcpServer.pdb
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\TestApp.csprojResolveAssemblyReference.cache
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\testerApp.frmMain.resources
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\testApp.Properties.Resources.resources
+C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\TestApp.csproj.GenerateResource.Cache
