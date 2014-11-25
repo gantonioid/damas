@@ -12,4 +12,3 @@ C:\Users\Antonio\Desktop\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.pdb
 C:\Users\Kinari\Documents\damas\DamasNuevo\DamasNuevo\bin\Debug\DamasNuevo.exe.config
 C:\Users\Kinari\Documents\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.exe
 C:\Users\Kinari\Documents\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.pdb
-C:\Users\Antonio\Documents\GitHub\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.csprojResolveAssemblyReference.cache

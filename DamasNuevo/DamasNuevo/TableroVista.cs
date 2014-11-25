@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace DamasNuevo
 {
@@ -17,7 +18,10 @@ namespace DamasNuevo
         internal int startX, startY;  //coordenadas de la esquina del tablero
         internal int cellWidth;       //tamaño de celda
         Tablero tablero;
-        Computer jugador = new Computer(); 
+        Computer jugador = new Computer();
+        Computer oponentePrueba = new Computer();
+
+        bool ganar, perder, tablas, conexion = false;
 
         //iniciar aplicacion
         public TableroVista()
@@ -27,9 +31,11 @@ namespace DamasNuevo
             //Establecer Comunicación
             //
             //Asignar turno
+            jugador.color = 1;
+            oponentePrueba.color = 2;
             //
-            //
-            jugar();
+            Thread juego = new Thread(new ThreadStart(jugar));
+            juego.Start();
         }
 
         //Llamado on WM_PAINT
@@ -138,17 +144,30 @@ namespace DamasNuevo
         }
 
         public void jugar()
-        {//CICLO-------
-            //Esperar turno
+        {
+            while (!ganar && !perder && !tablas && !conexion)
+            {
+                //CICLO-------
+                //Esperar turno
+                while (jugador.color != tablero.getTurno())
+                {
+                    tablero.setTurno(1);
+                }
+                //Generar jugada, tirar y actualizar tablero
+                tablero = jugador.play(this.tablero);
+                //Volver a pintar
+                Invalidate();
+                Thread.Sleep(500);
+                tablero.setTurno(2);
+                //enviar al servidor --- "jugador.listaMovimientos(0)"
+                tablero = oponentePrueba.play(this.tablero);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
 
-            //Generar jugada, tirar y actualizar tablero
-            //tablero = jugador.play(this.tablero);
-            //enviar al servidor --- "jugador.listaMovimientos(0)"
-
-            //Volver a pintar
-            Invalidate();
-            //Esperar movimiento del rival
-        //FIN CICLO-----
+                //Volver a pintar
+                Invalidate();
+                Thread.Sleep(500);
+                //Esperar movimiento del rival
+                //FIN CICLO-----
+            }
         }
     }
 }

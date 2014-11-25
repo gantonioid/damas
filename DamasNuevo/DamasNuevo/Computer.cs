@@ -11,10 +11,16 @@ namespace DamasNuevo
         //Variables globales
         Tablero tablero;
         List<Movimiento> listaMovimientos = new List<Movimiento>();  //este debe ser un arreglo de posicion inicial y final
+        public int color; //color de fichas que le tocó, según el turno
+        int fichaComida = -1;
 
         public Computer()
         {
-
+        }
+        
+        public Computer(int jugador)
+        {
+            color = jugador;
         }
 
         public Tablero play(Tablero tableroActualizado)
@@ -23,9 +29,11 @@ namespace DamasNuevo
             Casilla[] casillas = tablero.getCasillas();
             for (int i = 0; i < casillas.Length; i++)
             {   
-                ChecarCasilla(casillas[i]);
+                if(casillas[i].getFicha() != null && casillas[i].getFicha().getColor()==color)
+                    ChecarCasilla(casillas[i]);
             }
             move();
+            listaMovimientos.Clear();
 
             //Después de la jugada, devolver el tablero para dibujarlo de nuevo
             return this.tablero;
@@ -40,20 +48,21 @@ namespace DamasNuevo
             {
                 for (int i = 0; i < 4; i++) //reviso todos los vecinos
                 {
-                    Ficha fichaVecino = tablero.getFicha(vecinos[i]);
-                    if (fichaVecino != null) //hay ficha en la posicion del vecino i
-                    {
-                        if (fichaVecino.getColor() != casilla.getFicha().getColor()) //es diferente a mi propio color
+                    if(vecinos[i] > -1){
+                        Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                        if (fichaVecino != null) //hay ficha en la posicion del vecino i
                         {
-                            checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion()); 
+                            if (fichaVecino.getColor() != casilla.getFicha().getColor()) //es diferente a mi propio color
+                            {
+                                checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion()); 
+                            }
+                        }
+                        else //si no hay ficha en esta posicion
+                        {
+                            Movimiento movimiento=new Movimiento(casilla.getFicha().getPosicion(), vecinos[i]);
+                            listaMovimientos.Add(movimiento); //no voy a comer, lo agrego al final
                         }
                     }
-                    else //si no hay ficha en esta posicion
-                    {
-                        Movimiento movimiento=new Movimiento(casilla.getFicha().getPosicion(), vecinos[i]);
-                        listaMovimientos.Add(movimiento); //no voy a comer, lo agrego al final
-                    }
-
                 }
             }
             else //no es reina
@@ -65,12 +74,19 @@ namespace DamasNuevo
                         {
                             for (int i = 2; i < 4; i++) //reviso los inferiores
                             {
-                                Ficha fichaVecino = tablero.getFicha(vecinos[i]);
-                                if (fichaVecino != null) //hay ficha
-                                {
-                                    if (color != fichaVecino.getColor())
+                                if(vecinos[i] > -1){
+                                    Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                                    if (fichaVecino != null) //hay ficha
                                     {
-                                        checkVecino(i, casillas[fichaVecino.getPosicion()],casilla.getFicha().getPosicion()); 
+                                        if (color != fichaVecino.getColor())
+                                        {
+                                            checkVecino(i, casillas[fichaVecino.getPosicion()],casilla.getFicha().getPosicion()); 
+                                        }
+                                    }else
+                                    {
+                                        //no hay ficha, es movimiento válido
+                                        Movimiento movimiento = new Movimiento(casilla.getFicha().getPosicion(), vecinos[i]);
+                                        listaMovimientos.Add(movimiento);
                                     }
                                 }
                             }
@@ -80,12 +96,20 @@ namespace DamasNuevo
                         {
                             for (int i = 0; i < 2; i++) //reviso los superiores
                             {
-                                Ficha fichaVecino = tablero.getFicha(vecinos[i]);
-                                if (fichaVecino != null) //hay ficha
+                                if (vecinos[i] > -1)
                                 {
-                                    if (color != fichaVecino.getColor())
+                                    Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                                    if (fichaVecino != null) //hay ficha
                                     {
-                                        checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion());
+                                        if (color != fichaVecino.getColor())
+                                        {
+                                            checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion());
+                                        }
+                                    }else
+                                    {
+                                        //no hay ficha, es movimiento válido
+                                        Movimiento movimiento = new Movimiento(casilla.getFicha().getPosicion(), vecinos[i]);
+                                        listaMovimientos.Add(movimiento);
                                     }
                                 }
                             }
@@ -99,11 +123,15 @@ namespace DamasNuevo
         {
             int[] vecinos=casilla.getVecinos();
             Casilla[] casillas = tablero.getCasillas();
-            Ficha fichaVecino = tablero.getFicha(vecinos[direccion]); //agarro la ficha del vecino de la direccion a la que se quiere comer
-            if(fichaVecino!=null) //no hay ficha, entonces es valido y puedo comer
+            if (vecinos[direccion] > -1)
             {
-                Movimiento movimiento=new Movimiento(posini, vecinos[direccion]);
-                listaMovimientos.Insert(0,movimiento); //tengo posibilidad de comer, lo agrego al principio. 
+                Ficha fichaVecino = tablero.getFicha(vecinos[direccion]); //agarro la ficha del vecino de la direccion a la que se quiere comer
+                if (fichaVecino == null) //no hay ficha, entonces es valido y puedo comer
+                {
+                    Movimiento movimiento = new Movimiento(posini, vecinos[direccion]);
+                    listaMovimientos.Insert(0, movimiento); //tengo posibilidad de comer, lo agrego al principio.
+                    fichaComida = casilla.getFicha().getPosicion();
+                }
             }
         }
 
@@ -122,9 +150,13 @@ namespace DamasNuevo
                Casilla[] casillas = tablero.getCasillas(); //tomo las casillas actuales
                Ficha ficha = casillas[posIni].getFicha(); //agarro la ficha que quiero tomar 
                casillas[posIni].setFicha(null); //pongo la casilla en null
+               ficha.setPosicion(posFin);
                casillas[posFin].setFicha(ficha); //pongo la ficha en la casilla nueva
+               if(fichaComida > -1)    casillas[fichaComida].setFicha(null);
+               if (posFin >= 0 && posFin <= 3 && color == 2) ficha.setCoronada(true);
+               if (posFin >= 28 && posFin <= 31 && color == 1) ficha.setCoronada(true);
                tablero.setCasillas(casillas);
-
+               fichaComida = -1;
             }
         }
 
