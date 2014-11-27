@@ -61,6 +61,7 @@ namespace CommClient {
 
             button1.Enabled = false;
             button2.Enabled = false;
+            timer.Enabled = true;
 
             serverStream.Close();
             clientSocket.Close();
@@ -68,8 +69,9 @@ namespace CommClient {
         }
 
         private void button3_Click(object sender, EventArgs e) {
-            IPAddress = textBox1.Text;
-            
+            //IPAddress = textBox1.Text;
+            IPAddress = "127.0.0.1";
+
             try {
                 clientSocket.Connect(IPAddress, 8888);
                 msg("Client Started");
@@ -88,6 +90,7 @@ namespace CommClient {
         private void button4_Click(object sender, EventArgs e) {
             byte[] inStream = new byte[10024];
             try {
+                serverStream = clientSocket.GetStream();
                 serverStream.Read(inStream, 0, inStream.Length);
                 string returndata = System.Text.Encoding.ASCII.GetString(inStream);
                 msg("Data from Server : " + returndata);
@@ -97,8 +100,10 @@ namespace CommClient {
         }
 
         private void timer_Tick(object sender, EventArgs e) {
+            
             byte[] inStream = new byte[10024];
             try {
+                serverStream = clientSocket.GetStream();
                 serverStream.Read(inStream, 0, inStream.Length);
                 string returndata = System.Text.Encoding.ASCII.GetString(inStream);
                 msg("Data from Server : " + returndata);

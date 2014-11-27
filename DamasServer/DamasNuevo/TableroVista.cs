@@ -253,7 +253,7 @@ namespace DamasNuevo
 
             Invoke(setText);
 
-            send("holl");
+            //send("holl");
         }
 
         private void TableroVista_FormClosed(object sender, FormClosedEventArgs e) {
@@ -262,6 +262,12 @@ namespace DamasNuevo
 
         private void send(string data) {
             data = data.Substring(0, data.Length - 2);
+            comm.Send(data);
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            string data = "puto";
+            //data = data.Substring(0, data.Length - 2);
             comm.Send(data);
         }
     }
