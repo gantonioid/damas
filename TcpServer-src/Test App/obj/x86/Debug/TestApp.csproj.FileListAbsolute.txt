@@ -18,3 +18,5 @@ C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\Tes
 C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\testerApp.frmMain.resources
 C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\testApp.Properties.Resources.resources
 C:\Users\Antonio\Documents\GitHub\damas\TcpServer-src\Test App\obj\x86\Debug\TestApp.csproj.GenerateResource.Cache
+C:\Users\ecast_000\Documents\UDEM\damas\TcpServer-src\Test App\obj\x86\Debug\tcpServerTester.exe
+C:\Users\ecast_000\Documents\UDEM\damas\TcpServer-src\Test App\obj\x86\Debug\tcpServerTester.pdb

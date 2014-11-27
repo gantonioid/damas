@@ -15,3 +15,14 @@ C:\Users\Kinari\Documents\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.pdb
 C:\Users\ecast_000\Documents\UDEM\damas\DamasNuevo\DamasNuevo\bin\Debug\DamasNuevo.exe.config
 C:\Users\ecast_000\Documents\UDEM\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.exe
 C:\Users\ecast_000\Documents\UDEM\damas\DamasNuevo\DamasNuevo\obj\Debug\DamasNuevo.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\bin\Debug\DamasNuevo.exe.config
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.exe
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\bin\Debug\DamasNuevo.exe
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\bin\Debug\DamasNuevo.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\bin\Debug\tcpServer.dll
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\bin\Debug\tcpServer.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.csprojResolveAssemblyReference.cache
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.Properties.Resources.resources
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.TableroVista.resources
+C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.csproj.GenerateResource.Cache

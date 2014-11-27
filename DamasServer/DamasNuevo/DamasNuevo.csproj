@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Casilla.cs" />
+    <Compile Include="Comm.cs" />
     <Compile Include="Computer.cs" />
     <Compile Include="Ficha.cs" />
     <Compile Include="Movimiento.cs" />
@@ -84,6 +85,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TcpServer-src\tcpServer\tcpServer.csproj">
+      <Project>{537d46b1-f453-4ee7-b0f9-0336d7af745a}</Project>
+      <Name>tcpServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

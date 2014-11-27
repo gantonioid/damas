@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Net.Sockets;
 
 namespace DamasNuevo
 {
@@ -20,6 +21,7 @@ namespace DamasNuevo
         Tablero tablero;
         Computer jugador = new Computer();
         Computer oponentePrueba = new Computer();
+        public delegate void invokeDelegate();
 
         bool ganar, perder, tablas, conexion = false;
 
@@ -29,7 +31,10 @@ namespace DamasNuevo
             InitializeComponent();
             tablero = new Tablero();
             //Establecer Comunicación
-            //
+            StartServer();
+            timer.Enabled = true;
+            Console.WriteLine("HELLOOOO");
+            
             //Asignar turno
             jugador.color = 1;
             oponentePrueba.color = 2;
@@ -168,6 +173,96 @@ namespace DamasNuevo
                 //Esperar movimiento del rival
                 //FIN CICLO-----
             }
+        }
+
+
+        //Metodos dedicados para la comunicacion
+        private void StartServer() {
+            comm.Port = 8888;
+            comm.Open();
+        }
+
+        public void displayTcpServerStatus() {
+            if (comm.IsOpen) {
+                Console.WriteLine("PORT OPEN");
+            }
+            else {
+                Console.WriteLine("NOT OPEN");
+            }
+        }
+
+
+        protected byte[] readStream(TcpClient client) {
+            NetworkStream stream = client.GetStream();
+            if (stream.DataAvailable) {
+                byte[] data = new byte[client.Available];
+
+                int bytesRead = 0;
+                try {
+                    bytesRead = stream.Read(data, 0, data.Length);
+                }
+                catch (IOException) {
+                }
+
+                if (bytesRead < data.Length) {
+                    byte[] lastData = data;
+                    data = new byte[bytesRead];
+                    Array.ConstrainedCopy(lastData, 0, data, 0, bytesRead);
+                }
+                return data;
+            }
+            return null;
+        }
+
+        public void logData(bool sent, string text) {
+            //txtLog.Text += "\r\n" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + (sent ? " SENT:\r\n" : " RECEIVED:\r\n");
+            txtLog.Text += text;
+            txtLog.Text += "\r\n";
+            if (txtLog.Lines.Length > 500) {
+                string[] temp = new string[500];
+                Array.Copy(txtLog.Lines, txtLog.Lines.Length - 500, temp, 0, 500);
+                txtLog.Lines = temp;
+            }
+            txtLog.SelectionStart = txtLog.Text.Length;
+            txtLog.ScrollToCaret();
+        }
+
+        private void comm_OnConnect(tcpServer.TcpServerConnection connection) {
+            invokeDelegate setText = () => lblConnected.Text = comm.Connections.Count.ToString();
+
+            Invoke(setText);
+        }
+
+        private void comm_OnDataAvailable(tcpServer.TcpServerConnection connection) {
+            byte[] data = readStream(connection.Socket);
+
+            if (data != null) {
+                string dataStr = Encoding.ASCII.GetString(data);
+
+                invokeDelegate del = () => {
+                    logData(false, dataStr);
+                };
+                Invoke(del);
+
+                data = null;
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e) {
+            invokeDelegate setText = () => lblConnected.Text = comm.Connections.Count.ToString();
+
+            Invoke(setText);
+
+            send("holl");
+        }
+
+        private void TableroVista_FormClosed(object sender, FormClosedEventArgs e) {
+            comm.Close();
+        }
+
+        private void send(string data) {
+            data = data.Substring(0, data.Length - 2);
+            comm.Send(data);
         }
     }
 }

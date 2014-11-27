@@ -7,3 +7,12 @@ c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\Com
 c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.csproj.GenerateResource.Cache
 c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.exe
 c:\users\ecast_000\documents\visual studio 2012\Projects\CommunicationClient\CommClient\obj\Debug\CommClient.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\bin\Debug\CommClient.exe.config
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.exe
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\bin\Debug\CommClient.exe
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\bin\Debug\CommClient.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.csprojResolveAssemblyReference.cache
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.Form1.resources
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.Properties.Resources.resources
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.csproj.GenerateResource.Cache

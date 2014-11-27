@@ -39,11 +39,6 @@ namespace CommClient {
 
             serverStream.Write(outStream, 0, outStream.Length);
             serverStream.Flush();
-
-            byte[] inStream = new byte[10024];
-            serverStream.Read(inStream, 0, inStream.Length);
-            string returndata = System.Text.Encoding.ASCII.GetString(inStream);
-            msg("Data from Server : " + returndata);
         }
 
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
@@ -88,6 +83,28 @@ namespace CommClient {
             button1.Enabled = true;
             button2.Enabled = true;
             
+        }
+
+        private void button4_Click(object sender, EventArgs e) {
+            byte[] inStream = new byte[10024];
+            try {
+                serverStream.Read(inStream, 0, inStream.Length);
+                string returndata = System.Text.Encoding.ASCII.GetString(inStream);
+                msg("Data from Server : " + returndata);
+            }
+            catch (Exception) {
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e) {
+            byte[] inStream = new byte[10024];
+            try {
+                serverStream.Read(inStream, 0, inStream.Length);
+                string returndata = System.Text.Encoding.ASCII.GetString(inStream);
+                msg("Data from Server : " + returndata);
+            }
+            catch (Exception) {
+            }
         }
     }
 }
