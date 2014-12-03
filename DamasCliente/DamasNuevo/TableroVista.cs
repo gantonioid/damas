@@ -21,27 +21,40 @@ namespace DamasNuevo
         Tablero tablero;
         Computer jugador = new Computer();
         Computer oponentePrueba = new Computer();
-        public delegate void invokeDelegate();
+
+        System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
+        NetworkStream serverStream;
+        String IPAddress;
 
         bool ganar, perder, tablas, conexion = false;
+
+
+        Thread juego = null;
 
         //iniciar aplicacion
         public TableroVista()
         {
             InitializeComponent();
             tablero = new Tablero();
+
             //Establecer Comunicación
-            StartServer();
-            timer.Enabled = true;
-            Console.WriteLine("HELLOOOO");
-            
+            //
+            IPAddress = "127.0.0.1";
+
+            try {
+                clientSocket.Connect(IPAddress, 8888);
+            }
+            catch {
+            }
+
+            juego = new Thread(new ThreadStart(jugar));
             //Asignar turno
             jugador.color = 1;
             oponentePrueba.color = 2;
+            //
+
             
-            //MANDAR MENSAJES A LOS JUGADORES         "color:1" al primero que se conecte,       "color:2" al otro
-            Thread juego = new Thread(new ThreadStart(jugar));
-            
+            juego.Start();
         }
 
         //Llamado on WM_PAINT
@@ -153,44 +166,27 @@ namespace DamasNuevo
         {
             Movimiento movimiento = null;
             string data = "";
-            string receivedData = "";
+
             while (!ganar && !perder && !tablas && !conexion)
             {
-                //DECIRLE AL JUGADOR 1 QUE JUEGUE
-                tablero.setTurno(1);
-
-                //ESPERAR MENSAJE 
-                while (receivedData != "")
+                //CICLO-------
+                //Esperar turno
+                while (jugador.color != tablero.getTurno())
                 {
-                    Thread.Sleep(100);
-                    //revisar si ya recibio el mensaje, actualizar receivedData
+                    tablero.setTurno(1);
                 }
-                
-                //PARSEAR MENSAJE
-
-                //HACER OBJETO TIPO "MOVIMIENTO" CON LA INFO DEL MENSAJE
-
-                //DECIRLE A "COMPUTER" QUE ANALICE LOS MOVIMIENTOS LEGALES
-
-                //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
-
-                //Volver a pintar
-                Invalidate();
-                Thread.Sleep(3000);
-
-                //CAMBIAR TURNO Y DECIRLE AL JUGADOR 2 QUE JUEGE, /////////VOLVER A HACER TODO PARA EL JUGADOR 2
-                tablero.setTurno(2);
                 //Generar jugada, tirar y actualizar tablero
                 tablero = jugador.play(this.tablero);
+                //Volver a pintar
+                Invalidate();
+                Thread.Sleep(500);
+                tablero.setTurno(2);
 
-                
-                
-                
-
+                //enviar al servidor --- "jugador.listaMovimientos(0)"
                 //Envio de mensaje
                 movimiento = jugador.getListaMovimientos()[0];
                 data = "mover:" + movimiento.getPosIni() + "," + movimiento.getPosFin();
-                //comm.Send(data);
+                SendMessage(data);
 
                 tablero = oponentePrueba.play(this.tablero);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
 
@@ -202,100 +198,16 @@ namespace DamasNuevo
             }
         }
 
+        public void SendMessage(string message) {
+            serverStream = clientSocket.GetStream();
+            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(message);
 
-        //Metodos dedicados para la comunicacion
-        private void StartServer() {
-            comm.Port = 8888;
-            comm.Open();
-        }
-
-        public void displayTcpServerStatus() {
-            if (comm.IsOpen) {
-                Console.WriteLine("PORT OPEN");
-            }
-            else {
-                Console.WriteLine("NOT OPEN");
-            }
-        }
-
-
-        protected byte[] readStream(TcpClient client) {
-            NetworkStream stream = client.GetStream();
-            if (stream.DataAvailable) {
-                byte[] data = new byte[client.Available];
-
-                int bytesRead = 0;
-                try {
-                    bytesRead = stream.Read(data, 0, data.Length);
-                }
-                catch (IOException) {
-                }
-
-                if (bytesRead < data.Length) {
-                    byte[] lastData = data;
-                    data = new byte[bytesRead];
-                    Array.ConstrainedCopy(lastData, 0, data, 0, bytesRead);
-                }
-                return data;
-            }
-            return null;
-        }
-
-        public void logData(bool sent, string text) {
-            //txtLog.Text += "\r\n" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + (sent ? " SENT:\r\n" : " RECEIVED:\r\n");
-            txtLog.Text += text;
-            txtLog.Text += "\r\n";
-            if (txtLog.Lines.Length > 500) {
-                string[] temp = new string[500];
-                Array.Copy(txtLog.Lines, txtLog.Lines.Length - 500, temp, 0, 500);
-                txtLog.Lines = temp;
-            }
-            txtLog.SelectionStart = txtLog.Text.Length;
-            txtLog.ScrollToCaret();
-        }
-
-        private void comm_OnConnect(tcpServer.TcpServerConnection connection) {
-            invokeDelegate setText = () => lblConnected.Text = comm.Connections.Count.ToString();
-
-            Invoke(setText);
-        }
-
-        private void comm_OnDataAvailable(tcpServer.TcpServerConnection connection) {
-            byte[] data = readStream(connection.Socket);
-
-            if (data != null) {
-                string dataStr = Encoding.ASCII.GetString(data);
-
-                invokeDelegate del = () => {
-                    logData(false, dataStr);
-                };
-                Invoke(del);
-
-                data = null;
-            }
-        }
-
-        private void timer_Tick(object sender, EventArgs e) {
-            invokeDelegate setText = () => lblConnected.Text = comm.Connections.Count.ToString();
-
-            Invoke(setText);
-
-            //send("holl");
+            serverStream.Write(outStream, 0, outStream.Length);
+            serverStream.Flush();
         }
 
         private void TableroVista_FormClosed(object sender, FormClosedEventArgs e) {
-            comm.Close();
-        }
-
-        private void send(string data) {
-            data = data.Substring(0, data.Length - 2);
-            comm.Send(data);
-        }
-
-        private void button1_Click(object sender, EventArgs e) {
-            string data = "hh";
-            //data = data.Substring(0, data.Length - 2);
-            comm.Send(data);
+            juego.Abort();
         }
     }
 }

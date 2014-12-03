@@ -34,14 +34,9 @@ namespace DamasNuevo
                     ChecarCasilla(casillas[i]);
             }
             move();
-            
 
             //Después de la jugada, devolver el tablero para dibujarlo de nuevo
             return this.tablero;
-        }
-
-        public List<Movimiento> getListaMovimientos() {
-            return listaMovimientos;
         }
 
         public void ChecarCasilla(Casilla casilla)
@@ -140,6 +135,10 @@ namespace DamasNuevo
             }
         }
 
+        public List<Movimiento> getListaMovimientos() {
+            return listaMovimientos;
+        }
+
         public void move()
         {
             if (listaMovimientos == null) //no hay movimientos validos 
@@ -151,7 +150,6 @@ namespace DamasNuevo
                Movimiento accion=listaMovimientos[0]; //tomo el primer movimiento valido
                int posIni=accion.getPosIni();
                int posFin=accion.getPosFin();
-
                //tableor destino = tablero origen 
                Casilla[] casillas = tablero.getCasillas(); //tomo las casillas actuales
                Ficha ficha = casillas[posIni].getFicha(); //agarro la ficha que quiero tomar 
