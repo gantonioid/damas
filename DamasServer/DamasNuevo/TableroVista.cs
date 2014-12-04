@@ -24,6 +24,8 @@ namespace DamasNuevo
         public delegate void invokeDelegate();
         bool gotData1 = false;
         string receivedData1 = "";
+        bool gotData2 = false;
+        string receivedData2 = "";
 
         bool ganar, perder, tablas, conexion = false;
 
@@ -36,12 +38,11 @@ namespace DamasNuevo
             tablero = new Tablero();
             //Establecer Comunicación
             StartServer();
-            timer.Enabled = true;
+            //timer.Enabled = true;
             Console.WriteLine("HELLOOOO");
             
             //Asignar turno
-            jugador.color = 1;
-            oponentePrueba.color = 2;
+            
             
             //MANDAR MENSAJES A LOS JUGADORES         "color:1" al primero que se conecte,       "color:2" al otro
             juego = new Thread(new ThreadStart(jugar));
@@ -159,6 +160,8 @@ namespace DamasNuevo
             string data = "";
             string[] Jugador1Str = null;
             string[] Jugador1params = null;
+            string[] Jugador2Str = null;
+            string[] Jugador2params = null;
             int posini, posfin;
 
             while (!ganar && !perder && !tablas && !conexion)
@@ -166,20 +169,21 @@ namespace DamasNuevo
                 //DECIRLE AL JUGADOR 1 QUE JUEGUE
                 tablero.setTurno(1);
 
-                //ESPERAR MENSAJE 
+                //ESPERAR MENSAJE de cliente 0
                 while (gotData1 == false)
                 {
                     Thread.Sleep(100);
                     //revisar si ya recibio el mensaje, actualizar receivedData
+                    
                 }
                 gotData1 = false;
 
 
-                //PARSEAR MENSAJE
+                //PARSEAR MENSAJE 
                 Jugador1Str = receivedData1.Split(':');
-                Console.WriteLine("Comando: " + Jugador1Str[0]);
-                Console.WriteLine("Mensaje: " + Jugador1Str[1]);
-                Jugador1params = Jugador1Str[1].Split(',');
+                Console.WriteLine("Cliente: " + Jugador1Str[0]);
+                Console.WriteLine("Comando: " + Jugador1Str[1]);
+                Jugador1params = Jugador1Str[2].Split(',');
                 Console.WriteLine("Param1: " + Jugador1params[0]);
                 Console.WriteLine("Param2: " + Jugador1params[1]);
 
@@ -194,27 +198,49 @@ namespace DamasNuevo
 
                 //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
                 //jugador.move(movimiento1);
-
-                //Volver a pintar
-                Invalidate();
-                //Thread.Sleep(3000);
-
-                //CAMBIAR TURNO Y DECIRLE AL JUGADOR 2 QUE JUEGE, /////////VOLVER A HACER TODO PARA EL JUGADOR 2
-                tablero.setTurno(2);
+                
                 //Generar jugada, tirar y actualizar tablero
                 tablero = jugador.play(this.tablero, movimiento1);
 
-                //envio de mensaje de confirmacion
-                comm.Send("OK", 0);
+                //Volver a pintar
+                Invalidate();
+                //envio de jugada del jugador 1 al jgador 2
+                comm.Send(receivedData1, 1);
                 
-                
+                //Termina turno de jugador uno11111111111111111111111111111111111111111111111111111111
+                //CAMBIAR TURNO Y DECIRLE AL JUGADOR 2 QUE JUEGE, /////////VOLVER A HACER TODO PARA EL JUGADOR 2
+                tablero.setTurno(2);
+
+                //ESPERAR MENSAJE de cliente 1
+                while (gotData2 == false) {
+                    Thread.Sleep(100);
+                    //revisar si ya recibio el mensaje, actualizar receivedData
+
+                }
+                gotData2 = false;
+
+                //PARSEAR MENSAJE 
+                Jugador2Str = receivedData2.Split(':');
+                Console.WriteLine("Cliente: " + Jugador2Str[0]);
+                Console.WriteLine("Comando: " + Jugador2Str[1]);
+                Jugador2params = Jugador2Str[2].Split(',');
+                Console.WriteLine("Param1: " + Jugador2params[0]);
+                Console.WriteLine("Param2: " + Jugador2params[1]);
+
+                posini = Int32.Parse(Jugador2params[0]);
+                posfin = Int32.Parse(Jugador2params[1]);
+
+                Movimiento movimiento2 = new Movimiento(posini, posfin);
 
                 //Envio de mensaje
-                movimiento = jugador.getListaMovimientos()[0];
-                data = "mover:" + movimiento.getPosIni() + "," + movimiento.getPosFin();
+                //movimiento = jugador.getListaMovimientos()[0];
+                //data = "mover:" + movimiento.getPosIni() + "," + movimiento.getPosFin();
                 //comm.Send(data);
 
-                tablero = oponentePrueba.play(this.tablero);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
+                tablero = oponentePrueba.play(this.tablero, movimiento2);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
+
+                //envio de jugada 2 a cliente 0
+                comm.Send(receivedData2, 0);
 
                 //Volver a pintar
                 Invalidate();
@@ -243,6 +269,7 @@ namespace DamasNuevo
 
         protected byte[] readStream(TcpClient client) {
             NetworkStream stream = client.GetStream();
+
             if (stream.DataAvailable) {
                 byte[] data = new byte[client.Available];
 
@@ -278,8 +305,21 @@ namespace DamasNuevo
         }
 
         public string getData(string message) {
-            gotData1 = true;
-            receivedData1 = message;
+            string[] parser = null;
+
+            //Identificar di el mensaje es del cliente 0
+            //PARSEAR MENSAJE
+            parser = message.Split(':');
+            if (parser[0] == "0") {
+                gotData1 = true;
+                receivedData1 = message;
+                Console.WriteLine(receivedData1);
+            }
+            if (parser[0] == "1") {
+                gotData2 = true;
+                receivedData2 = message;
+                Console.WriteLine(receivedData2);
+            }
 
             return message;
         }
@@ -287,7 +327,19 @@ namespace DamasNuevo
         private void comm_OnConnect(tcpServer.TcpServerConnection connection) {
             invokeDelegate setText = () => {
                 lblConnected.Text = comm.Connections.Count.ToString();
-                juego.Start();
+                if (comm.Connections.Count == 2) {
+                    //inicializacion de jugadores
+                    //Cliente 0
+                    jugador.color = 1;
+                    comm.Send("Color:Blanco", 0);
+                    //Cliente 1
+                    oponentePrueba.color = 2;
+                    comm.Send("Color:Rojo", 1);
+
+                    comm.Send("Jugar");
+
+                    juego.Start();
+                } 
             };
 
             Invoke(setText);
@@ -296,8 +348,18 @@ namespace DamasNuevo
         private void comm_OnDataAvailable(tcpServer.TcpServerConnection connection) {
             byte[] data = readStream(connection.Socket);
 
+            int numeroCliente = -1;
+            int aux = 0;
+            foreach (tcpServer.TcpServerConnection conn in comm.Connections) {
+                if (conn == connection) {
+                    numeroCliente = aux;
+                }
+                aux++;
+            }
+
             if (data != null) {
-                string dataStr = Encoding.ASCII.GetString(data);
+                string dataStr = numeroCliente.ToString();
+                dataStr += ":" + Encoding.ASCII.GetString(data);
 
                 invokeDelegate del = () => {
                     logData(false, dataStr);

@@ -39,6 +39,21 @@ namespace DamasNuevo
             return this.tablero;
         }
 
+        public Tablero play(Tablero tableroActualizado, Movimiento accion) {
+            //listaMovimientos.Clear();
+            this.tablero = tableroActualizado;
+            Casilla[] casillas = tablero.getCasillas();
+            for (int i = 0; i < casillas.Length; i++) {
+                if (casillas[i].getFicha() != null && casillas[i].getFicha().getColor() == color)
+                    ChecarCasilla(casillas[i]);
+            }
+            move(accion);
+
+
+            //Después de la jugada, devolver el tablero para dibujarlo de nuevo
+            return this.tablero;
+        }
+
         public void ChecarCasilla(Casilla casilla)
         {
             int[] vecinos = casilla.getVecinos(); //checo los vecinos de esta casilla 
@@ -161,6 +176,30 @@ namespace DamasNuevo
                if (posFin >= 28 && posFin <= 31 && color == 1) ficha.setCoronada(true);
                tablero.setCasillas(casillas);
                fichaComida = -1;
+            }
+        }
+
+        public void move(Movimiento accion) {
+            if (listaMovimientos == null) //no hay movimientos validos 
+            {
+                //perder o empate
+            }
+            else //hay algun movimiento? 
+            {
+                int posIni = accion.getPosIni();
+                int posFin = accion.getPosFin();
+
+                //tableor destino = tablero origen 
+                Casilla[] casillas = tablero.getCasillas(); //tomo las casillas actuales
+                Ficha ficha = casillas[posIni].getFicha(); //agarro la ficha que quiero tomar 
+                casillas[posIni].setFicha(null); //pongo la casilla en null
+                ficha.setPosicion(posFin);
+                casillas[posFin].setFicha(ficha); //pongo la ficha en la casilla nueva
+                if (fichaComida > -1) casillas[fichaComida].setFicha(null);
+                if (posFin >= 0 && posFin <= 3 && color == 2) ficha.setCoronada(true);
+                if (posFin >= 28 && posFin <= 31 && color == 1) ficha.setCoronada(true);
+                tablero.setCasillas(casillas);
+                fichaComida = -1;
             }
         }
 

@@ -139,11 +139,20 @@ namespace testerApp
         private void tcpServer1_OnDataAvailable(tcpServer.TcpServerConnection connection)
         {
             byte[] data = readStream(connection.Socket);
+            int numeroCliente = -1;
+            int aux = 0;
+            foreach (tcpServer.TcpServerConnection conn in tcpServer1.Connections) {
+                if (conn == connection) {
+                    numeroCliente = aux;
+                }
+                aux++;
+            }
 
             if (data != null)
             {
-                string dataStr = Encoding.ASCII.GetString(data);
-
+                string dataStr = "Cliente: " + numeroCliente;
+                dataStr += ":: " + Encoding.ASCII.GetString(data);
+                
                 invokeDelegate del = () =>
                 {
                     logData(false, dataStr);

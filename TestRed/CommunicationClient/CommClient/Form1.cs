@@ -61,7 +61,7 @@ namespace CommClient {
 
             button1.Enabled = false;
             button2.Enabled = false;
-            timer.Enabled = true;
+            //timer.Enabled = true;
 
             serverStream.Close();
             clientSocket.Close();

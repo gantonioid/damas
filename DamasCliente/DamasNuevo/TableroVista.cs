@@ -40,21 +40,7 @@ namespace DamasNuevo
             //Establecer Comunicación
             //
             IPAddress = "127.0.0.1";
-
-            try {
-                clientSocket.Connect(IPAddress, 8888);
-            }
-            catch {
-            }
-
-            juego = new Thread(new ThreadStart(jugar));
-            //Asignar turno
-            jugador.color = 1;
-            oponentePrueba.color = 2;
-            //
-
             
-            juego.Start();
         }
 
         //Llamado on WM_PAINT
@@ -168,6 +154,10 @@ namespace DamasNuevo
             string data = "";
             byte[] inStream = new byte[10024];
             string returndata = "";
+
+            string[] Jugador2Str = null;
+            string[] Jugador2params = null;
+            int posini, posfin;
             
             string mensaje = "";
 
@@ -184,34 +174,98 @@ namespace DamasNuevo
                 //Volver a pintar
                 Invalidate();
                 Thread.Sleep(500);
-                tablero.setTurno(2);
-
-                Console.WriteLine("Good morning");
 
                 //enviar al servidor --- "jugador.listaMovimientos(0)"
                 //Envio de mensaje
                 movimiento = jugador.getListaMovimientos()[0];
                 data = "mover:" + movimiento.getPosIni() + "," + movimiento.getPosFin();
                 SendMessage(data);
+                Console.WriteLine(data);
 
-                inStream = new byte[10024];
-                returndata = "";
-                serverStream = clientSocket.GetStream();
-                serverStream.Read(inStream, 0, inStream.Length);
-                returndata = System.Text.Encoding.ASCII.GetString(inStream);
-                //MAnejando el EOF
-                returndata = returndata.Substring(0, returndata.IndexOf("\0"));
-                //Console.WriteLine("return: " + returndata);
-                mensaje = returndata;
+                //Turno 2
+                tablero.setTurno(2);
+                Console.WriteLine("turno 2");
 
-                Console.WriteLine(mensaje);
-                tablero = oponentePrueba.play(this.tablero);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
+                mensaje = getMessage();
+                //PARSEAR MENSAJE 
+                Jugador2Str = mensaje.Split(':');
+                Console.WriteLine("Cliente: " + Jugador2Str[0]);
+                Console.WriteLine("Comando: " + Jugador2Str[1]);
+                Jugador2params = Jugador2Str[2].Split(',');
+                Console.WriteLine("Param1: " + Jugador2params[0]);
+                Console.WriteLine("Param2: " + Jugador2params[1]);
+
+                posini = Int32.Parse(Jugador2params[0]);
+                posfin = Int32.Parse(Jugador2params[1]);
+
+                Movimiento movimiento2 = new Movimiento(posini, posfin);
+
+                tablero = oponentePrueba.play(this.tablero, movimiento2);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
 
                 //Volver a pintar
                 Invalidate();
                 Thread.Sleep(500);
                 //Esperar movimiento del rival
                 //FIN CICLO-----
+            }
+        }
+
+        //jugar como rojo
+        public void jugar2() {
+            Movimiento movimiento = null;
+            string data = "";
+            byte[] inStream = new byte[10024];
+            string returndata = "";
+
+            string[] Jugador1Str = null;
+            string[] Jugador1params = null;
+            int posini, posfin;
+
+            string mensaje = "";
+
+            while (!ganar && !perder && !tablas && !conexion) {
+                //CICLO-------
+                
+                //Turno 2
+                tablero.setTurno(1);
+                Console.WriteLine("turno 1");
+
+                mensaje = getMessage();
+                //PARSEAR MENSAJE 
+                Jugador1Str = mensaje.Split(':');
+                Console.WriteLine("Cliente: " + Jugador1Str[0]);
+                Console.WriteLine("Comando: " + Jugador1Str[1]);
+                Jugador1params = Jugador1Str[2].Split(',');
+                Console.WriteLine("Param1: " + Jugador1params[0]);
+                Console.WriteLine("Param2: " + Jugador1params[1]);
+
+                posini = Int32.Parse(Jugador1params[0]);
+                posfin = Int32.Parse(Jugador1params[1]);
+
+                Movimiento movimiento1 = new Movimiento(posini, posfin);
+
+                tablero = jugador.play(this.tablero, movimiento1);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
+
+                //Volver a pintar
+                Invalidate();
+                Thread.Sleep(500);
+                //
+                //FIN CICLO-----
+
+                //Esperar turno
+                tablero.setTurno(2);
+                //Generar jugada, tirar y actualizar tablero
+                tablero = oponentePrueba.play(this.tablero);
+                //Volver a pintar
+                Invalidate();
+                Thread.Sleep(500);
+                //enviar al servidor --- "jugador.listaMovimientos(0)"
+                //Envio de mensaje
+                movimiento = oponentePrueba.getListaMovimientos()[0];
+                data = "mover:" + movimiento.getPosIni() + "," + movimiento.getPosFin();
+                SendMessage(data);
+                Console.WriteLine(data);
+
             }
         }
 
@@ -233,17 +287,44 @@ namespace DamasNuevo
             serverStream.Flush();
         }
 
-        public void getMessage() {
+        public string getMessage() {
             byte[] inStream = new byte[10024];
             string returndata = "";
-                serverStream = clientSocket.GetStream();
-                serverStream.Read(inStream, 0, inStream.Length);
-                returndata = System.Text.Encoding.ASCII.GetString(inStream);
-                Console.WriteLine("return: " + returndata);
+            serverStream = clientSocket.GetStream();
+            serverStream.Read(inStream, 0, inStream.Length);
+            returndata = System.Text.Encoding.ASCII.GetString(inStream);
+            //MAnejando el EOF
+            returndata = returndata.Substring(0, returndata.IndexOf("\0"));
 
-                if (returndata == "OK") {
-                    gotMessage = true;
-                }
+
+            return returndata;
+        }
+
+        private void Jugar(object sender, EventArgs e) {
+
+            try {
+                clientSocket.Connect(IPAddress, 8888);
+            }
+            catch {
+            }
+
+            jugador.color = 1;
+            oponentePrueba.color = 2;
+
+            string mensaje = getMessage();
+
+            if (mensaje == "Color:Blanco") {
+                juego = new Thread(new ThreadStart(jugar));
+            }
+            else {
+                juego = new Thread(new ThreadStart(jugar2));
+            }
+
+            mensaje = getMessage();
+
+            if (mensaje == "Jugar") {
+                juego.Start();
+            }
         }
 
     }
