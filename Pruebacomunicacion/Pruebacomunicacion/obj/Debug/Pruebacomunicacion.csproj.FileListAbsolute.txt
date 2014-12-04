@@ -16,3 +16,6 @@ C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\ob
 C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.Form1.resources
 C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.Properties.Resources.resources
 C:\Users\Antonio\Documents\GitHub\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.csproj.GenerateResource.Cache
+C:\Users\ecast_000\Documents\UDEM\damas\Pruebacomunicacion\Pruebacomunicacion\bin\Debug\Pruebacomunicacion.exe.config
+C:\Users\ecast_000\Documents\UDEM\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.exe
+C:\Users\ecast_000\Documents\UDEM\damas\Pruebacomunicacion\Pruebacomunicacion\obj\Debug\Pruebacomunicacion.pdb

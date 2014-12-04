@@ -204,7 +204,8 @@ namespace DamasNuevo
                 //Generar jugada, tirar y actualizar tablero
                 tablero = jugador.play(this.tablero, movimiento1);
 
-                
+                //envio de mensaje de confirmacion
+                comm.Send("OK", 0);
                 
                 
 

@@ -1,0 +1,9 @@
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\bin\Debug\DamasNuevo.exe.config
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.exe
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\bin\Debug\DamasNuevo.exe
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\bin\Debug\DamasNuevo.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.Properties.Resources.resources
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.TableroVista.resources
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasClient.csproj.GenerateResource.Cache
+C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasClient.csprojResolveAssemblyReference.cache

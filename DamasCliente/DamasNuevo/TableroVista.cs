@@ -27,7 +27,7 @@ namespace DamasNuevo
         String IPAddress;
 
         bool ganar, perder, tablas, conexion = false;
-
+        bool gotMessage = false;
 
         Thread juego = null;
 
@@ -166,7 +166,10 @@ namespace DamasNuevo
         {
             Movimiento movimiento = null;
             string data = "";
-            bool gotMessage = false;
+            byte[] inStream = new byte[10024];
+            string returndata = "";
+            
+            string mensaje = "";
 
             while (!ganar && !perder && !tablas && !conexion)
             {
@@ -183,16 +186,25 @@ namespace DamasNuevo
                 Thread.Sleep(500);
                 tablero.setTurno(2);
 
+                Console.WriteLine("Good morning");
+
                 //enviar al servidor --- "jugador.listaMovimientos(0)"
                 //Envio de mensaje
                 movimiento = jugador.getListaMovimientos()[0];
                 data = "mover:" + movimiento.getPosIni() + "," + movimiento.getPosFin();
                 SendMessage(data);
 
-                while(gotMessage == false){
-                    
-                }
+                inStream = new byte[10024];
+                returndata = "";
+                serverStream = clientSocket.GetStream();
+                serverStream.Read(inStream, 0, inStream.Length);
+                returndata = System.Text.Encoding.ASCII.GetString(inStream);
+                //MAnejando el EOF
+                returndata = returndata.Substring(0, returndata.IndexOf("\0"));
+                //Console.WriteLine("return: " + returndata);
+                mensaje = returndata;
 
+                Console.WriteLine(mensaje);
                 tablero = oponentePrueba.play(this.tablero);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
 
                 //Volver a pintar
@@ -203,6 +215,16 @@ namespace DamasNuevo
             }
         }
 
+        
+
+        private void TableroVista_FormClosed(object sender, FormClosedEventArgs e) {
+            juego.Abort();
+            juego.Interrupt();
+            serverStream.Flush();
+            serverStream.Close();
+        }
+        //Communicacion
+
         public void SendMessage(string message) {
             serverStream = clientSocket.GetStream();
             byte[] outStream = System.Text.Encoding.ASCII.GetBytes(message);
@@ -211,8 +233,18 @@ namespace DamasNuevo
             serverStream.Flush();
         }
 
-        private void TableroVista_FormClosed(object sender, FormClosedEventArgs e) {
-            juego.Abort();
+        public void getMessage() {
+            byte[] inStream = new byte[10024];
+            string returndata = "";
+                serverStream = clientSocket.GetStream();
+                serverStream.Read(inStream, 0, inStream.Length);
+                returndata = System.Text.Encoding.ASCII.GetString(inStream);
+                Console.WriteLine("return: " + returndata);
+
+                if (returndata == "OK") {
+                    gotMessage = true;
+                }
         }
+
     }
 }

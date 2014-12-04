@@ -4,3 +4,6 @@ C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communica
 C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communication\obj\Debug\Communication.csprojResolveAssemblyReference.cache
 C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communication\obj\Debug\Communication.exe
 C:\Users\ecast_000\Documents\Visual Studio 2012\Projects\Communication\Communication\obj\Debug\Communication.pdb
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\Communication\Communication\bin\Debug\Communication.exe.config
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\Communication\Communication\obj\Debug\Communication.exe
+C:\Users\ecast_000\Documents\UDEM\damas\TestRed\Communication\Communication\obj\Debug\Communication.pdb
