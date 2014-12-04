@@ -166,6 +166,7 @@ namespace DamasNuevo
         {
             Movimiento movimiento = null;
             string data = "";
+            bool gotMessage = false;
 
             while (!ganar && !perder && !tablas && !conexion)
             {
@@ -187,6 +188,10 @@ namespace DamasNuevo
                 movimiento = jugador.getListaMovimientos()[0];
                 data = "mover:" + movimiento.getPosIni() + "," + movimiento.getPosFin();
                 SendMessage(data);
+
+                while(gotMessage == false){
+                    
+                }
 
                 tablero = oponentePrueba.play(this.tablero);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
 

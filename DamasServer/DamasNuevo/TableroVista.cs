@@ -22,8 +22,12 @@ namespace DamasNuevo
         Computer jugador = new Computer();
         Computer oponentePrueba = new Computer();
         public delegate void invokeDelegate();
+        bool gotData1 = false;
+        string receivedData1 = "";
 
         bool ganar, perder, tablas, conexion = false;
+
+        Thread juego;
 
         //iniciar aplicacion
         public TableroVista()
@@ -40,7 +44,7 @@ namespace DamasNuevo
             oponentePrueba.color = 2;
             
             //MANDAR MENSAJES A LOS JUGADORES         "color:1" al primero que se conecte,       "color:2" al otro
-            Thread juego = new Thread(new ThreadStart(jugar));
+            juego = new Thread(new ThreadStart(jugar));
             
         }
 
@@ -153,35 +157,52 @@ namespace DamasNuevo
         {
             Movimiento movimiento = null;
             string data = "";
-            string receivedData = "";
+            string[] Jugador1Str = null;
+            string[] Jugador1params = null;
+            int posini, posfin;
+
             while (!ganar && !perder && !tablas && !conexion)
             {
                 //DECIRLE AL JUGADOR 1 QUE JUEGUE
                 tablero.setTurno(1);
 
                 //ESPERAR MENSAJE 
-                while (receivedData != "")
+                while (gotData1 == false)
                 {
                     Thread.Sleep(100);
                     //revisar si ya recibio el mensaje, actualizar receivedData
                 }
-                
+                gotData1 = false;
+
+
                 //PARSEAR MENSAJE
+                Jugador1Str = receivedData1.Split(':');
+                Console.WriteLine("Comando: " + Jugador1Str[0]);
+                Console.WriteLine("Mensaje: " + Jugador1Str[1]);
+                Jugador1params = Jugador1Str[1].Split(',');
+                Console.WriteLine("Param1: " + Jugador1params[0]);
+                Console.WriteLine("Param2: " + Jugador1params[1]);
+
+                posini = Int32.Parse(Jugador1params[0]);
+                posfin = Int32.Parse(Jugador1params[1]);
 
                 //HACER OBJETO TIPO "MOVIMIENTO" CON LA INFO DEL MENSAJE
+                Movimiento movimiento1 = new Movimiento(posini, posfin);
 
                 //DECIRLE A "COMPUTER" QUE ANALICE LOS MOVIMIENTOS LEGALES
 
+
                 //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
+                //jugador.move(movimiento1);
 
                 //Volver a pintar
                 Invalidate();
-                Thread.Sleep(3000);
+                //Thread.Sleep(3000);
 
                 //CAMBIAR TURNO Y DECIRLE AL JUGADOR 2 QUE JUEGE, /////////VOLVER A HACER TODO PARA EL JUGADOR 2
                 tablero.setTurno(2);
                 //Generar jugada, tirar y actualizar tablero
-                tablero = jugador.play(this.tablero);
+                tablero = jugador.play(this.tablero, movimiento1);
 
                 
                 
@@ -196,7 +217,7 @@ namespace DamasNuevo
 
                 //Volver a pintar
                 Invalidate();
-                Thread.Sleep(500);
+                //Thread.Sleep(500);
                 //Esperar movimiento del rival
                 //FIN CICLO-----
             }
@@ -250,12 +271,23 @@ namespace DamasNuevo
                 Array.Copy(txtLog.Lines, txtLog.Lines.Length - 500, temp, 0, 500);
                 txtLog.Lines = temp;
             }
+
             txtLog.SelectionStart = txtLog.Text.Length;
             txtLog.ScrollToCaret();
         }
 
+        public string getData(string message) {
+            gotData1 = true;
+            receivedData1 = message;
+
+            return message;
+        }
+
         private void comm_OnConnect(tcpServer.TcpServerConnection connection) {
-            invokeDelegate setText = () => lblConnected.Text = comm.Connections.Count.ToString();
+            invokeDelegate setText = () => {
+                lblConnected.Text = comm.Connections.Count.ToString();
+                juego.Start();
+            };
 
             Invoke(setText);
         }
@@ -268,6 +300,7 @@ namespace DamasNuevo
 
                 invokeDelegate del = () => {
                     logData(false, dataStr);
+                    getData(dataStr);
                 };
                 Invoke(del);
 
@@ -285,6 +318,7 @@ namespace DamasNuevo
 
         private void TableroVista_FormClosed(object sender, FormClosedEventArgs e) {
             comm.Close();
+            juego.Abort();
         }
 
         private void send(string data) {

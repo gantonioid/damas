@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamasNuevo", "DamasNuevo\DamasNuevo.csproj", "{477262B4-0579-4C11-874E-624CA18E8022}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamasServer", "DamasNuevo\DamasServer.csproj", "{477262B4-0579-4C11-874E-624CA18E8022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tcpServer", "..\TcpServer-src\tcpServer\tcpServer.csproj", "{537D46B1-F453-4EE7-B0F9-0336D7AF745A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{477262B4-0579-4C11-874E-624CA18E8022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{477262B4-0579-4C11-874E-624CA18E8022}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{477262B4-0579-4C11-874E-624CA18E8022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{537D46B1-F453-4EE7-B0F9-0336D7AF745A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{537D46B1-F453-4EE7-B0F9-0336D7AF745A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{537D46B1-F453-4EE7-B0F9-0336D7AF745A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{537D46B1-F453-4EE7-B0F9-0336D7AF745A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
