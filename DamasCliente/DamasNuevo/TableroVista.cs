@@ -165,10 +165,7 @@ namespace DamasNuevo
             {
                 //CICLO-------
                 //Esperar turno
-                while (jugador.color != tablero.getTurno())
-                {
-                    tablero.setTurno(1);
-                }
+                
                 //Generar jugada, tirar y actualizar tablero
                 tablero = jugador.play(this.tablero);
                 //Volver a pintar
@@ -229,6 +226,8 @@ namespace DamasNuevo
                 //Turno 2
                 tablero.setTurno(1);
                 Console.WriteLine("turno 1");
+
+                Thread.Sleep(1000);
 
                 mensaje = getMessage();
                 //PARSEAR MENSAJE 

@@ -203,17 +203,30 @@ namespace DamasNuevo
                 }
 
                 //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
-                if (jugador.getListaMovimientos().Contains(movimiento1))
+                bool valid = false;
+                for (int i = 0; i < jugador.getListaMovimientos().Count(); i++)
                 {
-                    //Aplicar jugada
+                    if (jugador.getListaMovimientos()[i].getPosIni() == movimiento1.getPosIni() &&
+                        jugador.getListaMovimientos()[i].getPosFin() == movimiento1.getPosFin())
+                    {
+                        valid = true;
+                        break;
+                    }
+                    
+                }
+
+                if (valid)
+                {
+                    //Aplicar Jugada
                     tablero = jugador.play(this.tablero, movimiento1);
                 }
                 else
                 {
                     //JUGADOR 1 PERDIÓ, MANDARLE MENSAJE
                     //JUGADOR 2 GANÓ POR TRAMPA DEL JUGADOR 1
-                    tablero = jugador.play(this.tablero, movimiento1);
                 }
+
+
                 //Volver a pintar
                 Invalidate();
                 //envio de jugada del jugador 1 al jgador 2
@@ -247,23 +260,34 @@ namespace DamasNuevo
                 //VALIDAR MOVIMIENTO2
                 oponentePrueba.clearListaMovimientos();
                 Casilla[] casillas2 = tablero.getCasillas();
-                for (int i = 0; i < casillas.Length; i++)
+                for (int i = 0; i < casillas2.Length; i++)
                 {
-                    if (casillas2[i].getFicha() != null && casillas[i].getFicha().getColor() == jugador.color)
-                        oponentePrueba.ChecarCasilla(casillas2[i],tablero);
+                    if (casillas2[i].getFicha() != null && casillas2[i].getFicha().getColor() == oponentePrueba.color)
+                        oponentePrueba.ChecarCasilla(casillas2[i], tablero);
                 }
 
                 //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
-                if (oponentePrueba.getListaMovimientos().Contains(movimiento2))
+                valid = false;
+                for (int i = 0; i < oponentePrueba.getListaMovimientos().Count(); i++)
                 {
-                    //Aplicar jugada
+                    if (oponentePrueba.getListaMovimientos()[i].getPosIni() == movimiento2.getPosIni() &&
+                        oponentePrueba.getListaMovimientos()[i].getPosFin() == movimiento2.getPosFin())
+                    {
+                        valid = true;
+                        break;
+                    }
+
+                }
+
+                if (valid)
+                {
+                    //Aplicar Jugada
                     tablero = oponentePrueba.play(this.tablero, movimiento2);
                 }
                 else
                 {
-                    //JUGADOR 2 PERDIÓ, MANDARLE MENSAJE
-                    //JUGADOR 1 GANÓ POR TRAMPA DEL JUGADOR 2
-                    tablero = oponentePrueba.play(this.tablero, movimiento2);
+                    //JUGADOR 1 PERDIÓ, MANDARLE MENSAJE
+                    //JUGADOR 2 GANÓ POR TRAMPA DEL JUGADOR 1
                 }
 
 
