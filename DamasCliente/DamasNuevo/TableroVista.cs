@@ -39,7 +39,7 @@ namespace DamasNuevo
 
             //Establecer Comunicación
             //
-            IPAddress = "127.0.0.1";
+            
             
         }
 
@@ -301,6 +301,7 @@ namespace DamasNuevo
         }
 
         private void Jugar(object sender, EventArgs e) {
+            IPAddress = txtip.Text;
 
             try {
                 clientSocket.Connect(IPAddress, 8888);
@@ -313,7 +314,7 @@ namespace DamasNuevo
 
             string mensaje = getMessage();
 
-            if (mensaje == "Color:Blanco") {
+            if (mensaje == "color:blanco") {
                 juego = new Thread(new ThreadStart(jugar));
             }
             else {

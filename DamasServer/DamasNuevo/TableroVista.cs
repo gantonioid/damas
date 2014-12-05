@@ -331,10 +331,10 @@ namespace DamasNuevo
                     //inicializacion de jugadores
                     //Cliente 0
                     jugador.color = 1;
-                    comm.Send("Color:Blanco", 0);
+                    comm.Send("color:blanco", 0);
                     //Cliente 1
                     oponentePrueba.color = 2;
-                    comm.Send("Color:Rojo", 1);
+                    comm.Send("color:rojo", 1);
 
                     comm.Send("Jugar");
 
