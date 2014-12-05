@@ -9,3 +9,6 @@ C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasSe
 C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.Properties.Resources.resources
 C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.TableroVista.resources
 C:\Users\ecast_000\Documents\UDEM\damas\DamasServer\DamasNuevo\obj\Debug\DamasServer.csproj.GenerateResource.Cache
+C:\Users\Antonio\Documents\GitHub\damas\DamasServer\DamasNuevo\bin\Debug\DamasNuevo.exe.config
+C:\Users\Antonio\Documents\GitHub\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.exe
+C:\Users\Antonio\Documents\GitHub\damas\DamasServer\DamasNuevo\obj\Debug\DamasNuevo.pdb

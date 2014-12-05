@@ -16,6 +16,11 @@ namespace DamasNuevo
     //DIBUJA tablero en pantalla
     public partial class TableroVista : Form
     {
+        //Colores
+        SolidBrush blancas = new SolidBrush(Color.White);
+        SolidBrush rojas = new SolidBrush(Color.Red);
+
+
         internal int startX, startY;  //coordenadas de la esquina del tablero
         internal int cellWidth;       //tamaño de celda
         Tablero tablero;
@@ -117,9 +122,9 @@ namespace DamasNuevo
                     {
                         //Color de la ficha
                         if (tablero.getFicha(i).getColor() == 2)
-                            pieceColor = new SolidBrush(Color.Red);
+                            pieceColor = rojas;
                         else
-                            pieceColor = new SolidBrush(Color.White);
+                            pieceColor = blancas;
                         //Dibujar
                         y = i / 4;
                         x = (i % 4) * 2 + (y % 2 == 0 ? 1 : 0);
@@ -315,9 +320,11 @@ namespace DamasNuevo
             string mensaje = getMessage();
 
             if (mensaje == "color:blanco") {
+                blancas = new SolidBrush(Color.Blue);
                 juego = new Thread(new ThreadStart(jugar));
             }
             else {
+                rojas = new SolidBrush(Color.Blue);
                 juego = new Thread(new ThreadStart(jugar2));
             }
 

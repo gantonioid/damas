@@ -69,8 +69,8 @@ namespace CommClient {
         }
 
         private void button3_Click(object sender, EventArgs e) {
-            //IPAddress = textBox1.Text;
-            IPAddress = "127.0.0.1";
+            IPAddress = textBox1.Text;
+            //IPAddress = "127.0.0.1";
 
             try {
                 clientSocket.Connect(IPAddress, 8888);

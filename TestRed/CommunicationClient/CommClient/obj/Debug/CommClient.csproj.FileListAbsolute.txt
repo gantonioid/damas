@@ -16,3 +16,12 @@ C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\o
 C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.Form1.resources
 C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.Properties.Resources.resources
 C:\Users\ecast_000\Documents\UDEM\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.csproj.GenerateResource.Cache
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\bin\Debug\CommClient.exe.config
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.exe
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.pdb
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\bin\Debug\CommClient.exe
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\bin\Debug\CommClient.pdb
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.csprojResolveAssemblyReference.cache
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.Form1.resources
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.Properties.Resources.resources
+C:\Users\Antonio\Documents\GitHub\damas\TestRed\CommunicationClient\CommClient\obj\Debug\CommClient.csproj.GenerateResource.Cache
