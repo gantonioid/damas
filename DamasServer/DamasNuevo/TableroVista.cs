@@ -199,7 +199,7 @@ namespace DamasNuevo
                 for (int i = 0; i < casillas.Length; i++)
                 {
                     if (casillas[i].getFicha() != null && casillas[i].getFicha().getColor() == jugador.color)
-                        jugador.ChecarCasilla(casillas[i]);
+                        jugador.ChecarCasilla(casillas[i],tablero);
                 }
 
                 //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
@@ -212,6 +212,7 @@ namespace DamasNuevo
                 {
                     //JUGADOR 1 PERDIÓ, MANDARLE MENSAJE
                     //JUGADOR 2 GANÓ POR TRAMPA DEL JUGADOR 1
+                    tablero = jugador.play(this.tablero, movimiento1);
                 }
                 //Volver a pintar
                 Invalidate();
@@ -249,7 +250,7 @@ namespace DamasNuevo
                 for (int i = 0; i < casillas.Length; i++)
                 {
                     if (casillas2[i].getFicha() != null && casillas[i].getFicha().getColor() == jugador.color)
-                        oponentePrueba.ChecarCasilla(casillas2[i]);
+                        oponentePrueba.ChecarCasilla(casillas2[i],tablero);
                 }
 
                 //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
@@ -262,9 +263,9 @@ namespace DamasNuevo
                 {
                     //JUGADOR 2 PERDIÓ, MANDARLE MENSAJE
                     //JUGADOR 1 GANÓ POR TRAMPA DEL JUGADOR 2
+                    tablero = oponentePrueba.play(this.tablero, movimiento2);
                 }
 
-                tablero = oponentePrueba.play(this.tablero, movimiento2);
 
                 //envio de jugada 2 a cliente 0
                 comm.Send(receivedData2, 0);

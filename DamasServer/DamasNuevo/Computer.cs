@@ -146,6 +146,90 @@ namespace DamasNuevo
             }
         }
 
+        public void ChecarCasilla(Casilla casilla, Tablero tablero)
+        {
+            int[] vecinos = casilla.getVecinos(); //checo los vecinos de esta casilla 
+            Casilla[] casillas = tablero.getCasillas(); //para revisar todas las casillas del tablero
+
+            if (casilla.getFicha().getCoronada() == true) //es reina y tengo que revisar todos sus limites 
+            {
+                for (int i = 0; i < 4; i++) //reviso todos los vecinos
+                {
+                    if (vecinos[i] > -1)
+                    {
+                        Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                        if (fichaVecino != null) //hay ficha en la posicion del vecino i
+                        {
+                            if (fichaVecino.getColor() != casilla.getFicha().getColor()) //es diferente a mi propio color
+                            {
+                                checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion());
+                            }
+                        }
+                        else //si no hay ficha en esta posicion
+                        {
+                            Movimiento movimiento = new Movimiento(casilla.getFicha().getPosicion(), vecinos[i]);
+                            listaMovimientos.Add(movimiento); //no voy a comer, lo agrego al final
+                        }
+                    }
+                }
+            }
+            else //no es reina
+            {
+                int color = casilla.getFicha().getColor();
+                switch (color)
+                {
+                    case 1: //es blanco
+                        {
+                            for (int i = 2; i < 4; i++) //reviso los inferiores
+                            {
+                                if (vecinos[i] > -1)
+                                {
+                                    Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                                    if (fichaVecino != null) //hay ficha
+                                    {
+                                        if (color != fichaVecino.getColor())
+                                        {
+                                            checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion());
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //no hay ficha, es movimiento válido
+                                        Movimiento movimiento = new Movimiento(casilla.getFicha().getPosicion(), vecinos[i]);
+                                        listaMovimientos.Add(movimiento);
+                                    }
+                                }
+                            }
+
+                        } break;
+                    case 2: //es negro
+                        {
+                            for (int i = 0; i < 2; i++) //reviso los superiores
+                            {
+                                if (vecinos[i] > -1)
+                                {
+                                    Ficha fichaVecino = tablero.getFicha(vecinos[i]);
+                                    if (fichaVecino != null) //hay ficha
+                                    {
+                                        if (color != fichaVecino.getColor())
+                                        {
+                                            checkVecino(i, casillas[fichaVecino.getPosicion()], casilla.getFicha().getPosicion());
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //no hay ficha, es movimiento válido
+                                        Movimiento movimiento = new Movimiento(casilla.getFicha().getPosicion(), vecinos[i]);
+                                        listaMovimientos.Add(movimiento);
+                                    }
+                                }
+                            }
+
+                        } break;
+                }
+            }
+        }
+
         public void checkVecino(int direccion, Casilla casilla, int posini)
         {
             int[] vecinos=casilla.getVecinos();
@@ -210,6 +294,16 @@ namespace DamasNuevo
                 tablero.setCasillas(casillas);
                 fichaComida = -1;
             }
+        }
+
+        public void setTablero(Tablero tab)
+        {
+            this.tablero = tab;
+        }
+
+        public Tablero getTablero()
+        {
+            return tablero;
         }
 
     }
