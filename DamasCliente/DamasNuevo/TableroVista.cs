@@ -36,11 +36,6 @@ namespace DamasNuevo
         {
             InitializeComponent();
             tablero = new Tablero();
-
-            //Establecer Comunicación
-            //
-            
-            
         }
 
         //Llamado on WM_PAINT
@@ -307,6 +302,7 @@ namespace DamasNuevo
                 clientSocket.Connect(IPAddress, 8888);
             }
             catch {
+                Console.WriteLine("Error");
             }
 
             jugador.color = 1;
@@ -315,10 +311,12 @@ namespace DamasNuevo
             string mensaje = getMessage();
 
             if (mensaje == "color:blanco") {
+                txtip.Text = "Blanco";
                 juego = new Thread(new ThreadStart(jugar));
             }
             else {
                 juego = new Thread(new ThreadStart(jugar2));
+                txtip.Text = "Rojo";
             }
 
             mensaje = getMessage();

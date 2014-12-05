@@ -372,7 +372,13 @@ namespace DamasNuevo
         }
 
         private void timer_Tick(object sender, EventArgs e) {
-            invokeDelegate setText = () => lblConnected.Text = comm.Connections.Count.ToString();
+            invokeDelegate setText = () => {
+                    lblConnected.Text = comm.Connections.Count.ToString();
+                    if (comm.Connections.Count < 2 && !conexion) {
+                        conexion = true;
+                        Console.WriteLine("desconexion");
+                    }
+                };
 
             Invoke(setText);
 
