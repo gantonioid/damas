@@ -194,21 +194,32 @@ namespace DamasNuevo
                 Movimiento movimiento1 = new Movimiento(posini, posfin);
 
                 //DECIRLE A "COMPUTER" QUE ANALICE LOS MOVIMIENTOS LEGALES
-
+                jugador.clearListaMovimientos();
+                Casilla[] casillas = tablero.getCasillas();
+                for (int i = 0; i < casillas.Length; i++)
+                {
+                    if (casillas[i].getFicha() != null && casillas[i].getFicha().getColor() == jugador.color)
+                        jugador.ChecarCasilla(casillas[i]);
+                }
 
                 //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
-                //jugador.move(movimiento1);
-                
-                //Generar jugada, tirar y actualizar tablero
-                tablero = jugador.play(this.tablero, movimiento1);
-
+                if (jugador.getListaMovimientos().Contains(movimiento1))
+                {
+                    //Aplicar jugada
+                    tablero = jugador.play(this.tablero, movimiento1);
+                }
+                else
+                {
+                    //JUGADOR 1 PERDIÓ, MANDARLE MENSAJE
+                    //JUGADOR 2 GANÓ POR TRAMPA DEL JUGADOR 1
+                }
                 //Volver a pintar
                 Invalidate();
                 //envio de jugada del jugador 1 al jgador 2
                 comm.Send(receivedData1, 1);
                 
                 //Termina turno de jugador uno11111111111111111111111111111111111111111111111111111111
-                //CAMBIAR TURNO Y DECIRLE AL JUGADOR 2 QUE JUEGE, /////////VOLVER A HACER TODO PARA EL JUGADOR 2
+                //CAMBIAR TURNO
                 tablero.setTurno(2);
 
                 //ESPERAR MENSAJE de cliente 1
@@ -232,20 +243,34 @@ namespace DamasNuevo
 
                 Movimiento movimiento2 = new Movimiento(posini, posfin);
 
-                //Envio de mensaje
-                //movimiento = jugador.getListaMovimientos()[0];
-                //data = "mover:" + movimiento.getPosIni() + "," + movimiento.getPosFin();
-                //comm.Send(data);
+                //VALIDAR MOVIMIENTO2
+                oponentePrueba.clearListaMovimientos();
+                Casilla[] casillas2 = tablero.getCasillas();
+                for (int i = 0; i < casillas.Length; i++)
+                {
+                    if (casillas2[i].getFicha() != null && casillas[i].getFicha().getColor() == jugador.color)
+                        oponentePrueba.ChecarCasilla(casillas2[i]);
+                }
 
-                tablero = oponentePrueba.play(this.tablero, movimiento2);        //---------------------Sólo para probar el juego, QUITAR ESTO!!!
+                //SI EL MOVIMIENTO DEL MENSAJE ESTA EN LA LISTA, APLICAR MOVIMIENTO CON COMPUTER.MOVE(MOVIMIENTO), para que se actualice el tablero del servidor
+                if (oponentePrueba.getListaMovimientos().Contains(movimiento2))
+                {
+                    //Aplicar jugada
+                    tablero = oponentePrueba.play(this.tablero, movimiento2);
+                }
+                else
+                {
+                    //JUGADOR 2 PERDIÓ, MANDARLE MENSAJE
+                    //JUGADOR 1 GANÓ POR TRAMPA DEL JUGADOR 2
+                }
+
+                tablero = oponentePrueba.play(this.tablero, movimiento2);
 
                 //envio de jugada 2 a cliente 0
                 comm.Send(receivedData2, 0);
 
                 //Volver a pintar
                 Invalidate();
-                //Thread.Sleep(500);
-                //Esperar movimiento del rival
                 //FIN CICLO-----
             }
         }

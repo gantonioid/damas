@@ -40,6 +40,13 @@ namespace DamasNuevo
             return this.tablero;
         }
 
+        public void clearListaMovimientos()
+        {
+            this.listaMovimientos.Clear();
+        }
+
+
+
         public Tablero play(Tablero tableroActualizado, Movimiento accion) {
             //listaMovimientos.Clear();
             this.tablero = tableroActualizado;
