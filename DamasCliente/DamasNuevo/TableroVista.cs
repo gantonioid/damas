@@ -316,11 +316,8 @@ namespace DamasNuevo
             string mensaje = getMessage();
 
             if (mensaje == "color:blanco") {
-<<<<<<< HEAD
                 txtip.Text = "Blanco";
-=======
                 blancas = new SolidBrush(Color.Blue);
->>>>>>> befc5c054a7948268dac5d60d2914585d5aceec0
                 juego = new Thread(new ThreadStart(jugar));
             }
             else {
