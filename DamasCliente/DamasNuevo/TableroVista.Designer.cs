@@ -56,6 +56,7 @@
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.txtip);
             this.Controls.Add(this.button1);
+            this.MaximizeBox = false;
             this.Name = "TableroVista";
             this.Text = "Damas - Juego";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TableroVista_FormClosed);

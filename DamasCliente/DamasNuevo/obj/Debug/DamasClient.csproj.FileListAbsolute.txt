@@ -7,3 +7,12 @@ C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasN
 C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.TableroVista.resources
 C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasClient.csproj.GenerateResource.Cache
 C:\Users\ecast_000\Documents\UDEM\damas\DamasCliente\DamasNuevo\obj\Debug\DamasClient.csprojResolveAssemblyReference.cache
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\bin\Debug\DamasNuevo.exe.config
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.exe
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.pdb
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\bin\Debug\DamasNuevo.exe
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\bin\Debug\DamasNuevo.pdb
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\obj\Debug\DamasClient.csprojResolveAssemblyReference.cache
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.Properties.Resources.resources
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\obj\Debug\DamasNuevo.TableroVista.resources
+C:\Users\Antonio\Documents\GitHub\damas\DamasCliente\DamasNuevo\obj\Debug\DamasClient.csproj.GenerateResource.Cache
